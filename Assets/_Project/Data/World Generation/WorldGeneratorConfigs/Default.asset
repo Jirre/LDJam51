@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d24bc29421654ebfab05ceffb2ddddf6, type: 3}
+  m_Name: Default
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 371326b88bbfa6e46adb3c7ff55c6e53, type: 2}
+  _Guid: 1ef4d71760dc3c342a96156429e8f0ef
+  name: Default
+  _ForwardChance: 90
+  _TurnLeftChance: 40
+  _TurnRightChance: 40
+  _ReverseChance: 10
+  _1X1Chance: 50
+  _2X2Chance: 50
+  _3X3Chance: 50
+  _BaseSpawnChance: 12
+  _AddedSpawnChance: -2
+  _BaseRemoveChance: -2
+  _AddedRemoveChance: 2
+  _MaxFloors: 500
+  _MaxRoads: 0
+  _MinRoadLength: 0
+  MinRoadLength: 0

@@ -1,0 +1,3 @@
+[submodule "Assets/JvLib-Data"]
+	path = Assets/JvLib-Data
+	url = https://github.com/Jirre/JvLib-Data.git
