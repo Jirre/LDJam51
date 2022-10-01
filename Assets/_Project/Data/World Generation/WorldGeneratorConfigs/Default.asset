@@ -26,6 +26,6 @@ MonoBehaviour:
   _AddedSpawnChance: -2
   _BaseRemoveChance: -2
   _AddedRemoveChance: 2
-  _MaxFloors: 100
+  _MaxFloors: 200
   _MaxRoads: 1
-  _MinRoadLength: 32
+  _MinRoadLength: 8

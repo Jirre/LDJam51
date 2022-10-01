@@ -1,5 +1,7 @@
 using System;
-using JvLib.Utilities;
+#if UNITY_EDITOR
+using JvLib.Editor.Utilities;
+#endif
 using UnityEngine;
 
 namespace JvLib.Routines
@@ -13,8 +15,13 @@ namespace JvLib.Routines
             {
                 if (_holder != null) return _holder;
                 
-                if (_holder.IsNotNull() && PlayModeUtility.PlayModeState == PlayModeState.ExitingPlayMode)
+                if (_holder.IsNotNull())
                 {
+                    
+                    #if UNITY_EDITOR
+                    if (PlayModeUtility.PlayModeState == PlayModeState.ExitingPlayMode)
+                        return null;
+                    #endif
                     // Prevent OnDestroy Errors
                     return null;
                 }

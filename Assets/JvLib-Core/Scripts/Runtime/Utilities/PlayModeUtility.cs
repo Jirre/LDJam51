@@ -1,7 +1,8 @@
+#if UNITY_EDITOR
 using System;
 using UnityEditor;
 
-namespace JvLib.Utilities
+namespace JvLib.Editor.Utilities
 {
     public enum PlayModeState
     {
@@ -36,3 +37,4 @@ namespace JvLib.Utilities
         }
     }
 }
+#endif

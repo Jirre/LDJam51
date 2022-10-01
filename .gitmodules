@@ -1,3 +1,9 @@
+[submodule "Assets/JvLib-Core"]
+	path = Assets/JvLib-Core
+	url = https://github.com/Jirre/JvLib-Core.git
 [submodule "Assets/JvLib-Data"]
 	path = Assets/JvLib-Data
 	url = https://github.com/Jirre/JvLib-Data.git
+[submodule "Assets/JvLib-Generation"]
+	path = Assets/JvLib-Generation
+	url = https://github.com/Jirre/JvLib-Generation.git

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using JvLib.Events;
 using JvLib.Services;
+using Project.Buildings;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -36,8 +37,9 @@ namespace Project.Generation
             Init,
             GenerateGround,
             Pathing,
-            RenderGround,
             ResourcePlacing,
+            Rendering,
+            
             Complete,
         }
 
@@ -52,7 +54,7 @@ namespace Project.Generation
             _stateMachine.Add(EStates.Init, InitState);
             _stateMachine.Add(EStates.GenerateGround, GenerateGroundState);
             _stateMachine.Add(EStates.Pathing, PathingState);
-            _stateMachine.Add(EStates.RenderGround, RenderGroundState);
+            _stateMachine.Add(EStates.Rendering, RenderingState);
             _stateMachine.Add(EStates.Complete, CompleteState);
 
             _stateMachine.GotoState(EStates.Init);
@@ -147,6 +149,12 @@ namespace Project.Generation
             for (int i = 0; i < Mathf.Min(spawnPoints.Count, paths); i++)
             {
                 Vector2Int pos = spawnPoints[i];
+                if (_cells[pos].Cost < _Config.MinRoadLength)
+                {
+                    paths++;
+                    continue;
+                }
+                
                 _cells[pos].SetContent(EWorldCellContent.Spawn);
                 
                 while (pos != Vector2Int.zero)
@@ -156,8 +164,7 @@ namespace Project.Generation
                     float cost = _cells[pos].Cost;
                     foreach (WorldCell worldCell in neighbors)
                     {
-                        if (worldCell.Cost > cost || 
-                            worldCell.Content == EWorldCellContent.Road) continue;
+                        if (worldCell.Cost > cost) continue;
                         
                         pos = worldCell.Position;
                         cost = worldCell.Cost;
@@ -168,10 +175,10 @@ namespace Project.Generation
                 }
             }
 
-            pState.GotoState(EStates.RenderGround);
+            pState.GotoState(EStates.Rendering);
         }
 
-        private void RenderGroundState(EventState<EStates> pState)
+        private void RenderingState(EventState<EStates> pState)
         {
             foreach (KeyValuePair<Vector2, WorldCell> cell in _cells)
             {
@@ -186,9 +193,14 @@ namespace Project.Generation
             }
 
             _onBuildFinish.Dispatch();
+
+            GameObject obj = new GameObject("Base");
+            obj.transform.position = Vector3.zero;
+            obj.AddComponent<BuildingController>().SetConfig(BuildingConfig.Base_01);
+
             pState.GotoState(EStates.Complete);
         }
-
+        
         private void CompleteState(EventState<EStates> pState)
         {
             //FlagState

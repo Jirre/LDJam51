@@ -15,8 +15,8 @@ MonoBehaviour:
   _ParentObject: {fileID: 11400000, guid: 38da0a704238e7e429a950ed3aff6d6e, type: 2}
   _Guid: d0aba3f58684cce45bee46d627a4ae32
   name: Spawn
-  _ContentType: 2
-  _AdditionalMatches: 01000000
+  _ContentType: 3
+  _AdditionalMatches: 02000000
   _Default: {fileID: 1348564204691811820, guid: 108db88f2e6452a4c903df8ef39b0409, type: 3}
   _Variants:
   - Connections: 2

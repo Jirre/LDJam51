@@ -3,10 +3,15 @@
     public enum EWorldCellContent
     {
         Empty = 0,
-        Road = 1,
-        Spawn = 2,
-        Base = 3,
-        Resource = 4,
+        Obstacle = 1,
+        
+        Road = 2,
+        Spawn = 3,
+        
+        Trees = 4,
+        Stones = 5,
+        Crystals = 6,
+        Base = 8,
         Building = 16
     }
 }

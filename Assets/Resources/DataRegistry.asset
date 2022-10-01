@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da82eda38c0523a439fec7e4da6e7dd5, type: 3}
   m_Name: DataRegistry
   m_EditorClassIdentifier: 
-  _Lists: []
+  _Lists:
+  - {fileID: 11400000, guid: 38da0a704238e7e429a950ed3aff6d6e, type: 2}
+  - {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}

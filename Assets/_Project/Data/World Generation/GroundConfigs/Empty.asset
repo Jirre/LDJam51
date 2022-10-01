@@ -16,5 +16,6 @@ MonoBehaviour:
   _Guid: 70add872cca7cb44b86fda647993b269
   name: Empty
   _ContentType: 0
+  _AdditionalMatches: 
   _Default: {fileID: 7213317583841679736, guid: afedd2fe3519b614bba72f92ccdabac9, type: 3}
   _Variants: []

@@ -15,8 +15,8 @@ MonoBehaviour:
   _ParentObject: {fileID: 11400000, guid: 38da0a704238e7e429a950ed3aff6d6e, type: 2}
   _Guid: b91dd1fa73292d944b060f34ef351f85
   name: Road
-  _ContentType: 1
-  _AdditionalMatches: 02000000
+  _ContentType: 2
+  _AdditionalMatches: 0300000008000000
   _Default: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
   _Variants:
   - Connections: 6
@@ -55,3 +55,15 @@ MonoBehaviour:
   - Connections: 15
     _Prefab: {fileID: 1657063705132943179, guid: 0b6fb03dafc5ebc4a9f675a61616c86c, type: 3}
     _Rotation: 0
+  - Connections: 2
+    _Prefab: {fileID: 1243712327906696609, guid: 7ec2dc9f1db607f4e91d77b96a90bbee, type: 3}
+    _Rotation: 0
+  - Connections: 1
+    _Prefab: {fileID: 1243712327906696609, guid: 7ec2dc9f1db607f4e91d77b96a90bbee, type: 3}
+    _Rotation: 90
+  - Connections: 8
+    _Prefab: {fileID: 1243712327906696609, guid: 7ec2dc9f1db607f4e91d77b96a90bbee, type: 3}
+    _Rotation: 180
+  - Connections: 4
+    _Prefab: {fileID: 1243712327906696609, guid: 7ec2dc9f1db607f4e91d77b96a90bbee, type: 3}
+    _Rotation: 270
