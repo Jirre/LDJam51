@@ -8,7 +8,8 @@ namespace Project.Generation
         private GameObject _building;
         
         private Vector2Int _position;
-        private Transform _parent;
+        public Vector2Int Position => _position;
+        private readonly Transform _parent;
 
         public int Cost { get; }
         public EWorldCellContent Content { get; private set; }
@@ -34,7 +35,7 @@ namespace Project.Generation
                 _parent, 
                 true);
             _ground.transform.position = new Vector3(_position.x, 0f, _position.y);
-            _ground.transform.eulerAngles = Vector3.forward * (pConfig == null ? 0 : pConfig.GetRotation(pContext));
+            _ground.transform.eulerAngles = Vector3.up * (pConfig == null ? 0 : pConfig.GetRotation(pContext));
         }
     }
 }

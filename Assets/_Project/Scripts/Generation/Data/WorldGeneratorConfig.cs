@@ -130,6 +130,6 @@ namespace Project.Generation
 
         [Tooltip("Minimum road length")]
         [SerializeField] private int _MinRoadLength;
-        public int MinRoadLength;
+        public int MinRoadLength => _MinRoadLength;
     }
 }

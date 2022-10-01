@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using JvLib.Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,7 +11,9 @@ namespace Project.Generation
     {
         [SerializeField] private EWorldCellContent _ContentType;
         public EWorldCellContent ContentType => _ContentType;
-        
+
+        [SerializeField] private EWorldCellContent[] _AdditionalMatches;
+
         [SerializeField] private GameObject _Default;
         private Variants _defaultVariant;
         [SerializeField, TableList] private List<Variants> _Variants;
@@ -31,10 +34,15 @@ namespace Project.Generation
             foreach (Variants v in _Variants)
             {
                 if ((byte) v.Connections == pContext)
-                    return v._ZRotation;
+                    return v._Rotation;
             }
             
             return 0f;
+        }
+
+        public bool DoesConnect(EWorldCellContent pContent)
+        {
+            return pContent == ContentType || _AdditionalMatches.Contains(pContent);
         }
 
         [Serializable]
@@ -42,7 +50,7 @@ namespace Project.Generation
         {
             [TableColumnWidth(90, Resizable = false), EnumToggleButtons, HideLabel] public EGroundDirections Connections;
             [VerticalGroup("Content")] public GameObject _Prefab;
-            [VerticalGroup("Content")] public float _ZRotation;
+            [VerticalGroup("Content")] public float _Rotation;
         }
 
         [System.Flags]

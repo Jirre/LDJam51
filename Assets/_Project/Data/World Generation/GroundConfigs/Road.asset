@@ -15,38 +15,43 @@ MonoBehaviour:
   _ParentObject: {fileID: 11400000, guid: 38da0a704238e7e429a950ed3aff6d6e, type: 2}
   _Guid: b91dd1fa73292d944b060f34ef351f85
   name: Road
+  _ContentType: 1
+  _AdditionalMatches: 02000000
   _Default: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
   _Variants:
-  - Connections: 9
-    _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
-    _ZRotation: 0
-  - Connections: 3
-    _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
-    _ZRotation: 90
   - Connections: 6
     _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
-    _ZRotation: 180
+    _Rotation: 0
+  - Connections: 3
+    _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
+    _Rotation: 90
+  - Connections: 9
+    _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
+    _Rotation: 180
   - Connections: 12
     _Prefab: {fileID: 4179134096710764210, guid: 9f8a00365bc5df64397ef3a0e225a06d, type: 3}
-    _ZRotation: 270
+    _Rotation: 270
   - Connections: 10
     _Prefab: {fileID: 6763728637271076622, guid: c11ea8a2bb5ef094097f89042b2431db, type: 3}
-    _ZRotation: 0
+    _Rotation: 0
   - Connections: 5
     _Prefab: {fileID: 6763728637271076622, guid: c11ea8a2bb5ef094097f89042b2431db, type: 3}
-    _ZRotation: 90
-  - Connections: 13
-    _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
-    _ZRotation: 0
+    _Rotation: 90
   - Connections: 11
     _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
-    _ZRotation: 90
-  - Connections: 7
+    _Rotation: 0
+  - Connections: 13
     _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
-    _ZRotation: 180
+    _Rotation: 90
+  - Connections: 13
+    _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
+    _Rotation: 180
   - Connections: 14
     _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
-    _ZRotation: 270
+    _Rotation: 180
+  - Connections: 7
+    _Prefab: {fileID: 6287781091906086161, guid: 04876e29a1dec084688c73076765f20b, type: 3}
+    _Rotation: 270
   - Connections: 15
     _Prefab: {fileID: 1657063705132943179, guid: 0b6fb03dafc5ebc4a9f675a61616c86c, type: 3}
-    _ZRotation: 0
+    _Rotation: 0
