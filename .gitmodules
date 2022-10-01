@@ -7,3 +7,6 @@
 [submodule "Assets/JvLib-Generation"]
 	path = Assets/JvLib-Generation
 	url = https://github.com/Jirre/JvLib-Generation.git
+[submodule "JvLib-Core"]
+	path = JvLib-Core
+	url = https://github.com/Jirre/JvLib-Core.git
