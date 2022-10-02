@@ -16,6 +16,7 @@ MonoBehaviour:
   _Guid: 73d8a604981007c419be22468e2cb64f
   name: Base_01
   _Name: Base I
+  _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
   _CanBeDemolished: 0
   _AllowedCells: 
   _Base: {fileID: 2852181558450586998, guid: 47181bda614b6574d825e9cd2f2ec43f, type: 3}

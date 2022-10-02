@@ -107,15 +107,14 @@ namespace Project.Gameplay
         {
             if (!Svc.World.TryGetCell(pPosition, out WorldCell cell) ||
                 !_selectedBuildConfig.IsCellAllowed(cell.Content)) return false;
-            GameObject obj = new(_selectedBuildConfig.Name)
-            {
-                transform =
-                {
-                    position = new Vector3(pPosition.x, 0f, pPosition.y)
-                }
-            };
+
+            GameObject obj = Instantiate(_selectedBuildConfig.Prototype.gameObject);
+            obj.transform.position = new Vector3(pPosition.x, 0f, pPosition.y);
             
-            obj.AddComponent<BuildingBehaviour>().SetConfig(_selectedBuildConfig);
+            BuildingBehaviour behaviour = obj.GetComponent<BuildingBehaviour>();
+            behaviour.SetConfig(_selectedBuildConfig);
+            behaviour.OnBuild(cell);
+            
             SelectBuildConfig(null);
             return true;
         }

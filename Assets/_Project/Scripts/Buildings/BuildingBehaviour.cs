@@ -1,24 +1,36 @@
+using System.Collections.Generic;
 using DG.Tweening;
+using Project.Generation;
 using UnityEngine;
 
 namespace Project.Buildings
 {
     public class BuildingBehaviour : MonoBehaviour
     {
-        [SerializeField] private BuildingConfig _Config;
+        [SerializeField] protected BuildingConfig _Config;
         protected Transform WeaponTransform;
 
         private const float DROP_HEIGHT = 2f;
         private const float DROP_DELAY = 0.5f;
 
+        private List<Transform> _objects;
+
         public void SetConfig(BuildingConfig pConfig)
         {
             _Config = pConfig;
+            _objects ??= new List<Transform>();
+            
+            foreach (Transform o in _objects)
+            {
+                o.DOMoveY(-DROP_HEIGHT, DROP_DELAY * DROP_HEIGHT * o.transform.position.y);
+            }
+            _objects.Clear();
 
             if (pConfig.Base == null) return;
             GameObject baseObject = Instantiate(pConfig.Base, transform, true);
             baseObject.transform.localPosition = Vector3.up * DROP_HEIGHT;
             baseObject.transform.DOLocalMoveY(BuildingConstants.BASE_HEIGHT, DROP_DELAY);
+            _objects.Add(baseObject.transform);
             if (pConfig.Middle == null)
             {
                 if (pConfig.Weapon == null) return;
@@ -29,6 +41,7 @@ namespace Project.Buildings
             GameObject middleObject = Instantiate(pConfig.Middle, transform, true);
             middleObject.transform.localPosition = Vector3.up * DROP_HEIGHT * 2f;
             middleObject.transform.DOLocalMoveY(BuildingConstants.MIDDLE_HEIGHT, DROP_DELAY * 2f);
+            _objects.Add(middleObject.transform);
             if (pConfig.Top == null)
             {
                 if (pConfig.Weapon == null) return;
@@ -39,9 +52,16 @@ namespace Project.Buildings
             GameObject topObject = Instantiate(pConfig.Top, transform, true);
             topObject.transform.localPosition = Vector3.up * DROP_HEIGHT * 3f;
             topObject.transform.DOLocalMoveY(BuildingConstants.TOP_HEIGHT, DROP_DELAY * 3f);
+            _objects.Add(topObject.transform);
             if (pConfig.Weapon == null) return;
             SetWeapon(pConfig.Weapon, BuildingConstants.TOP_HEIGHT + BuildingConstants.WEAPON_ADDED_HEIGHT);
         }
+
+        public virtual void OnBuild(WorldCell pCell)
+        {
+            pCell.SetContent(EWorldCellContent.Building);
+        }
+        public virtual void OnDemolish() { }
 
         private void SetWeapon(GameObject pObj, float pHeight)
         {
@@ -49,6 +69,7 @@ namespace Project.Buildings
             weaponObject.transform.localPosition = Vector3.up * (DROP_HEIGHT + pHeight) * 2f ;
             weaponObject.transform.DOLocalMoveY(pHeight, DROP_DELAY * 3f);
             WeaponTransform = weaponObject.transform;
+            _objects.Add(weaponObject.transform);
         }
     }
 }

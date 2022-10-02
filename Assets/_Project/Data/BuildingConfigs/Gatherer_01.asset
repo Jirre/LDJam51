@@ -9,16 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2046bb7b34dc6f458d327b577f82229, type: 3}
-  m_Name: Harvester_01
+  m_Script: {fileID: 11500000, guid: 78d347c045694693926600d79af752b8, type: 3}
+  m_Name: Gatherer_01
   m_EditorClassIdentifier: 
   _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
-  _Guid: 6942056ac39b281428e31304c8f392f5
-  name: Harvester_01
-  _Name: Harvester I
+  _Guid: 35f0dcf2e8c57a64f96f0685437f31b4
+  name: Gatherer_01
+  _Name: Gatherer I
+  _BuildingPrototype: {fileID: 8057039603762259606, guid: 9007e7ba61e89294e9b6d94109167778, type: 3}
   _CanBeDemolished: 0
   _AllowedCells: 040000000500000006000000
   _Base: {fileID: 7928653028014927736, guid: ae9617f088165a94aad61f85ecf831c5, type: 3}
   _Middle: {fileID: 0}
   _Top: {fileID: 0}
   _Weapon: {fileID: 0}
+  _GatheringSpeed:
+    _Keys: 000000000100000002000000
+    _Values: 0a0000000800000005000000

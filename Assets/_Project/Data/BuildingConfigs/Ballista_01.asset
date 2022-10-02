@@ -16,6 +16,7 @@ MonoBehaviour:
   _Guid: 64afad7ada6e00c4abd7428f88ed53ba
   name: Ballista_01
   _Name: Ballista Tower I
+  _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
   _CanBeDemolished: 1
   _AllowedCells: 00000000
   _Base: {fileID: 1728081412147770141, guid: 8b18e07cb22feb4449c679d9c4757c58, type: 3}

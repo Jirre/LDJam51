@@ -16,6 +16,7 @@ MonoBehaviour:
   _Guid: 89abf75b3696d8a42a304529e16aae83
   name: WatchTower
   _Name: Watch Tower
+  _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
   _CanBeDemolished: 0
   _AllowedCells: 00000000
   _Base: {fileID: 7928653028014927736, guid: ae9617f088165a94aad61f85ecf831c5, type: 3}

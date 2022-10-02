@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using JvLib.Events;
 using JvLib.Services;
 using UnityEngine;
 
@@ -14,6 +16,13 @@ namespace Project.Gameplay
         private float _timer;
         [SerializeField] private float _TimerDuration = 10f;
         public float GetScaledTime() => _timer / _TimerDuration;
+
+        private SafeEvent _onTimerTick = new SafeEvent();
+        public event Action OnTimerTick
+        {
+            add => _onTimerTick += value;
+            remove => _onTimerTick -= value;
+        }
 
         private void Awake()
         {
@@ -33,6 +42,7 @@ namespace Project.Gameplay
             {
                 AddResources();
                 _timer = _TimerDuration;
+                _onTimerTick.Dispatch();
             }
             
             if (UnityEngine.Input.GetKeyDown(KeyCode.Space))

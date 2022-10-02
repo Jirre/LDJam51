@@ -8,6 +8,8 @@ namespace Project.Buildings
     public partial class BuildingConfig : DataEntry
     {
         [SerializeField] private string _Name;
+        [SerializeField] private BuildingBehaviour _BuildingPrototype;
+        public BuildingBehaviour Prototype => _BuildingPrototype;
         
         [SerializeField] private bool _CanBeDemolished;
         [SerializeField] private EWorldCellContent[] _AllowedCells;
