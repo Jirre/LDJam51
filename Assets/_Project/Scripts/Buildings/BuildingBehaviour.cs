@@ -47,7 +47,7 @@ namespace Project.Buildings
         {
             GameObject weaponObject = Instantiate(pObj, transform, true);
             weaponObject.transform.localPosition = Vector3.up * (DROP_HEIGHT + pHeight) * 2f ;
-            weaponObject.transform.DOLocalMoveY(pHeight, DROP_DELAY * 1.5f);
+            weaponObject.transform.DOLocalMoveY(pHeight, DROP_DELAY * 3f);
             WeaponTransform = weaponObject.transform;
         }
     }

@@ -19,20 +19,21 @@ namespace Project.Buildings.UI
         protected override void OnEnable()
         {
             base.OnEnable();
-            if (Svc.Ref.GameplayServiceManager.IsReady && Svc.GameplayServiceManager.IsServiceReady)
-                Svc.GameplayServiceManager.OnBuildConfigChanged += SetContext;
+            if (Svc.Ref.Gameplay.IsReady && Svc.Gameplay.IsServiceReady)
+                Svc.Gameplay.OnBuildConfigChanged += SetContext;
+            SetContext(null);
         }
 
         protected override void Start()
         {
             base.Start();
-            Svc.GameplayServiceManager.OnBuildConfigChanged += SetContext;
+            Svc.Gameplay.OnBuildConfigChanged += SetContext;
         }
 
         protected override void OnDisable()
         {
             base.OnDisable();
-            Svc.GameplayServiceManager.OnBuildConfigChanged -= SetContext;
+            Svc.Gameplay.OnBuildConfigChanged -= SetContext;
         }
 
         protected override void OnContextUpdate(BuildingConfig pContext)
@@ -44,7 +45,7 @@ namespace Project.Buildings.UI
 
         public void OnClick()
         {
-            Svc.GameplayServiceManager.SelectBuildConfig(_TargetConfig);
+            Svc.Gameplay.SelectBuildConfig(_TargetConfig);
         }
     }
 }

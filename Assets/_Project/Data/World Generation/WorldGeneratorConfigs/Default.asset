@@ -24,7 +24,7 @@ MonoBehaviour:
   _3X3Chance: 50
   _BaseSpawnChance: 12
   _AddedSpawnChance: -2
-  _BaseRemoveChance: -2
+  _BaseRemoveChance: -3
   _AddedRemoveChance: 2
   _Frequency: 2
   _Octaves: 2

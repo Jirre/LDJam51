@@ -16,7 +16,7 @@ MonoBehaviour:
   _Guid: 6942056ac39b281428e31304c8f392f5
   name: Harvester_01
   _Name: Harvester I
-  _CanBeDemolished: 1
+  _CanBeDemolished: 0
   _AllowedCells: 040000000500000006000000
   _Base: {fileID: 7928653028014927736, guid: ae9617f088165a94aad61f85ecf831c5, type: 3}
   _Middle: {fileID: 0}

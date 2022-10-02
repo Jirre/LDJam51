@@ -16,7 +16,7 @@ MonoBehaviour:
   _Guid: 579c450cc3477b246bdaafc7d1c6c09f
   name: Mage_01
   _Name: Mage Tower I
-  _CanBeDemolished: 0
+  _CanBeDemolished: 1
   _AllowedCells: 00000000
   _Base: {fileID: 4158632184947092657, guid: 993708b367fd31f42af52ee7d98acc21, type: 3}
   _Middle: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}

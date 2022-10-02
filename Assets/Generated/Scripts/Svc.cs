@@ -6,17 +6,17 @@ namespace JvLib.Services
     {
         public static class Ref
         {
-            public static ServiceReference<Project.Gameplay.GameplayServiceManager> GameplayServiceManager
+            public static ServiceReference<Project.Gameplay.GameplayServiceManager> Gameplay
                  = new ServiceReference<Project.Gameplay.GameplayServiceManager>();
             public static ServiceReference<Project.Generation.WorldServiceManager> World
                  = new ServiceReference<Project.Generation.WorldServiceManager>();
         }
 
-        public static Project.Gameplay.GameplayServiceManager GameplayServiceManager
+        public static Project.Gameplay.GameplayServiceManager Gameplay
         {
             get
             {
-                return Ref.GameplayServiceManager.Reference;
+                return Ref.Gameplay.Reference;
             }
         }
         public static Project.Generation.WorldServiceManager World
@@ -30,7 +30,7 @@ namespace JvLib.Services
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
         private static void ClearCache()
         {
-            Ref.GameplayServiceManager = new ServiceReference<Project.Gameplay.GameplayServiceManager>();
+            Ref.Gameplay = new ServiceReference<Project.Gameplay.GameplayServiceManager>();
             Ref.World = new ServiceReference<Project.Generation.WorldServiceManager>();
         }
     }

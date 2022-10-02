@@ -1,13 +1,42 @@
-using JvLib.UI.Visualizers;
+using JvLib.Services;
+using Project.Gameplay;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ResourceVisualizer : UIVisualizer<int>
+namespace Project.UI
 {
-    [SerializeField] private TMP_Text _Visualizer;
-    
-    protected override void OnContextUpdate(int pContext)
+    public class ResourceVisualizer : UIBehaviour
     {
-        if (_Visualizer != null) _Visualizer.SetText(pContext.ToString());
+        [SerializeField] private EResources _Resource;
+        [SerializeField] private TMP_Text _Visualizer;
+
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (Svc.Ref.Gameplay.IsReady && Svc.Gameplay.IsServiceReady)
+            {
+                Svc.Gameplay.OnResourceUpdate += SetContext;
+                SetContext();
+            }
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            Svc.Gameplay.OnResourceUpdate += SetContext;
+            SetContext();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Svc.Gameplay.OnResourceUpdate -= SetContext;
+        }
+
+        private void SetContext()
+        {
+            if (_Visualizer != null) _Visualizer.SetText(Svc.Gameplay.GetResource(_Resource).ToString());
+        }
     }
 }

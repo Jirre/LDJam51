@@ -16,3 +16,4 @@ MonoBehaviour:
   _Guid: 66a7991e00d938d4d94190dc11a3ac71
   name: Enemy_UFO_Black
   _Prefab: {fileID: 3886467780465300899, guid: 59e617a5b5866ad49a0d234773797a35, type: 3}
+  _Speed: 0
