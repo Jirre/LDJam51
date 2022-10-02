@@ -118,6 +118,41 @@ namespace Project.Generation
         }
         
         #endregion
+
+        #region --- Noise Generation ---
+
+        [Space]
+        [Tooltip("Frequency of the Noise Generator")] 
+        [SerializeField] [BoxGroup("Noise Generation")] private float _Frequency = 4;
+        public float NoiseFrequency => _Frequency;
+        [Tooltip("Octaves of the Noise Generator")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(1, 8)] private int _Octaves = 1;
+        public int NoiseOctaves => _Octaves;
+        [Tooltip("Lacunarity of the Noise Generator")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(1f, 4f)] private float _Lacunarity = 2f;
+        public float NoiseLacunarity => _Lacunarity;
+        [Tooltip("Persistence of the Noise Generator")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(0f, 1f)] private float _Persistence = 0.5f;
+        public float NoisePersistence => _Persistence;
+        
+        [Space]
+        [Tooltip("The Chance of forests to be placed")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(0, 100)] private float _ForestChance = 25f;
+        public float ForestChance => _ForestChance;
+        [Tooltip("The Chance of Mountains to be placed")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(0, 100)] private float _MountainThreshold = 25f;
+        public float MountainThreshold => _MountainThreshold;
+        [Tooltip("The Chance of Crystals to be placed within the mountains")] 
+        [SerializeField] [BoxGroup("Noise Generation"), Range(0, 100), Indent] private float _CrystalChance = 5f;
+        public float CrystalChance => _CrystalChance;
+        [Tooltip("The Chance of another Crystals to be placed is affected by every crystal placed")]
+        [SerializeField] [BoxGroup("Noise Generation"), Range(-100, 100), Indent] private float _CrystalPerCrystalChance = 5f;
+        public float CrystalPerCrystalChance => _CrystalPerCrystalChance;
+        [Tooltip("The Chance of another Crystals to be placed is affected by every stone placed")]
+        [SerializeField] [BoxGroup("Noise Generation"), Range(-100, 100), Indent] private float _CrystalPerStoneChance = 5f;
+        public float CrystalPerStoneChance => _CrystalPerStoneChance;
+
+        #endregion
         
         [Space]
         [Tooltip("Maximum number of tiles to spawn during creation")]

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using JvLib.Events;
+using JvLib.Generation.Noise;
 using JvLib.Services;
 using Project.Buildings;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -14,11 +16,16 @@ namespace Project.Generation
     {
         [SerializeField] private WorldGeneratorConfig _Config;
         private float _maxCells;
-        
+
+        private NoiseHash _woodHash;
+        private SimplexNoise2D _woodNoiseGenerator;
+        private NoiseHash _mountainHash;
+        private SimplexNoise2D _mountainNoiseGenerator;
+
         public bool IsServiceReady { get; private set; }
 
         private List<WorldGenerator> _generators;
-        private Dictionary<Vector2, WorldCell> _cells;
+        private Dictionary<Vector2Int, WorldCell> _cells;
 
         private List<Vector2Int> _endPoints;
 
@@ -54,6 +61,7 @@ namespace Project.Generation
             _stateMachine.Add(EStates.Init, InitState);
             _stateMachine.Add(EStates.GenerateGround, GenerateGroundState);
             _stateMachine.Add(EStates.Pathing, PathingState);
+            _stateMachine.Add(EStates.ResourcePlacing, GenerateResourcesState);
             _stateMachine.Add(EStates.Rendering, RenderingState);
             _stateMachine.Add(EStates.Complete, CompleteState);
 
@@ -69,7 +77,7 @@ namespace Project.Generation
         {
             Random.InitState((int)DateTime.Now.Ticks);
 
-            _cells = new Dictionary<Vector2, WorldCell>();
+            _cells = new Dictionary<Vector2Int, WorldCell>();
             _endPoints = new List<Vector2Int>();
             
             _generators = new List<WorldGenerator>();
@@ -78,6 +86,24 @@ namespace Project.Generation
 
             _maxCells = _Config.MaxFloors;
 
+            _woodHash = NoiseHash.Generate((int)DateTime.Now.Ticks, 128);
+            _woodNoiseGenerator = new SimplexNoise2D(
+                _woodHash,
+                _Config.NoiseFrequency,
+                _Config.NoiseOctaves,
+                _Config.NoiseLacunarity,
+                _Config.NoisePersistence,
+                0f, 100f);
+            
+            _mountainHash = NoiseHash.Generate(int.MaxValue - (int)DateTime.Now.Ticks, 128);
+            _mountainNoiseGenerator = new SimplexNoise2D(
+                _mountainHash,
+                _Config.NoiseFrequency,
+                _Config.NoiseOctaves,
+                _Config.NoiseLacunarity,
+                _Config.NoisePersistence,
+                0f, 100f);
+            
             Debug.Log(DateTime.Now.ToString("HH:mm:ss.ffffff") + ": Starting build process!");
             pState.GotoState(EStates.GenerateGround);
         }
@@ -175,12 +201,58 @@ namespace Project.Generation
                 }
             }
 
+            pState.GotoState(EStates.ResourcePlacing);
+        }
+
+        private void GenerateResourcesState(EventState<EStates> pState)
+        {
+            float[,] woods = _woodNoiseGenerator.CalcArray(
+                new float2(MinCoordinate.x, MinCoordinate.y),
+                new Vector2Int(
+                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
+                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
+            
+            float[,] mountains = _mountainNoiseGenerator.CalcArray(
+                new float2(MinCoordinate.x, MinCoordinate.y),
+                new Vector2Int(
+                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
+                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
+
+            float _crystalChance = _Config.CrystalChance;
+            
+            foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
+            {
+                if (cell.Value.Content != EWorldCellContent.Empty)
+                    continue;
+                
+                int aX = Mathf.Abs(MinCoordinate.x) + cell.Key.x;
+                int aY = Mathf.Abs(MinCoordinate.y) + cell.Key.y;
+                float mV = mountains[aX, aY];
+                
+                if (mV >= 100f - _Config.MountainThreshold)
+                {
+                    if (Random.Range(0, 100) < _crystalChance)
+                    {
+                        cell.Value.SetContent(EWorldCellContent.Crystals);
+                        _crystalChance += _Config.CrystalPerCrystalChance;
+                        continue;
+                    }
+                    cell.Value.SetContent(EWorldCellContent.Stones);
+                    _crystalChance += _Config.CrystalPerStoneChance;
+                    continue;
+                }
+                
+                float fV = woods[aX, aY];
+                if (fV < 100 - _Config.ForestChance) continue;
+                cell.Value.SetContent(EWorldCellContent.Trees);
+            }
+            
             pState.GotoState(EStates.Rendering);
         }
 
         private void RenderingState(EventState<EStates> pState)
         {
-            foreach (KeyValuePair<Vector2, WorldCell> cell in _cells)
+            foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
             {
                 GroundConfig config = GroundConfigs.GetConfig(cell.Value.Content);
                 byte context = 0;
