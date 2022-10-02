@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2046bb7b34dc6f458d327b577f82229, type: 3}
+  m_Name: Ballista_01
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
+  _Guid: 64afad7ada6e00c4abd7428f88ed53ba
+  name: Ballista_01
+  _Name: Ballista Tower I
+  _CanBeDemolished: 1
+  _AllowedCells: 00000000
+  _Base: {fileID: 1728081412147770141, guid: 8b18e07cb22feb4449c679d9c4757c58, type: 3}
+  _Middle: {fileID: 6680353027674912844, guid: 1f944f6a538693347a90930b5e18ba18, type: 3}
+  _Top: {fileID: 0}
+  _Weapon: {fileID: 2437050361100009390, guid: 612c0233d347d704ca53406a2c98049f, type: 3}

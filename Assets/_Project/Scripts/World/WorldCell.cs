@@ -17,15 +17,15 @@ namespace Project.Generation
         private const float ADDED_SPAWN_DISTANCE = .5f;
         private const float ADDED_SPAWN_SPEED = 0.25f;
 
-        public int Cost { get; }
+        public int Cost { get; private set; }
         public EWorldCellContent Content { get; private set; }
 
-        public WorldCell(Vector2Int pPosition, Transform pParent, int pCost)
+        public WorldCell(Vector2Int pPosition, Transform pParent)
         {
             _position = pPosition;
             _parent = pParent;
 
-            Cost = pCost;
+            Cost = int.MaxValue;
             Content = EWorldCellContent.Empty;
         }
 
@@ -47,6 +47,11 @@ namespace Project.Generation
             _ground.transform.position = new Vector3(_position.x, -BASE_SPAWN_DISTANCE - ADDED_SPAWN_DISTANCE * dist, _position.y);
             _ground.transform.DOMoveY(0, BASE_SPAWN_SPEED + ADDED_SPAWN_SPEED * dist);
             _ground.transform.eulerAngles = Vector3.up * (pConfig == null ? 0 : pConfig.GetRotation(pContext));
+        }
+
+        public void SetCost(int pCost)
+        {
+            Cost = pCost;
         }
     }
 }

@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using JvLib.Data;
 using Project.Generation;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Project.Buildings
@@ -13,11 +12,25 @@ namespace Project.Buildings
         [SerializeField] private bool _CanBeDemolished;
         [SerializeField] private EWorldCellContent[] _AllowedCells;
 
-        [SerializeField] private GameObject _Base;
+        public bool IsCellAllowed(EWorldCellContent pContent)
+        {
+            foreach (EWorldCellContent c in _AllowedCells)
+            {
+                if (c == pContent)
+                    return true;
+            }
+            return false;
+        }
+
+        [SerializeField, PreviewField] private GameObject _Base;
         public GameObject Base => _Base;
-        [SerializeField] private GameObject _Middle;
+        [SerializeField, PreviewField] private GameObject _Middle;
         public GameObject Middle => _Middle;
-        [SerializeField] private GameObject _Top;
+        [SerializeField, PreviewField] private GameObject _Top;
         public GameObject Top => _Top;
+
+        [Space] 
+        [SerializeField, PreviewField] private GameObject _Weapon;
+        public GameObject Weapon => _Weapon;
     }
 }

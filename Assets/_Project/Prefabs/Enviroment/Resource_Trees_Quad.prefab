@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2192753811043306986}
   - component: {fileID: 742471721664505017}
   - component: {fileID: 6810104569216063557}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 913460476885829747}
   - component: {fileID: 7403620648371437546}
   - component: {fileID: 304062945355236038}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 8063004295004147707}
   - component: {fileID: 3418633097897410624}
   - component: {fileID: 9199818519616233726}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 4305341134702718651}
   - component: {fileID: 869334807582744862}
   - component: {fileID: 3167306174043968980}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Resource_Trees_Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 547066384632658340}
   - component: {fileID: 3112376010526213554}
   - component: {fileID: 3844974085420981971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tree 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

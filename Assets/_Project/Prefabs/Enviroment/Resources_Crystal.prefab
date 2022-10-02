@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4593098478245296838}
   - component: {fileID: 893824082543433063}
   - component: {fileID: 9124632423035942080}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crystal 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 1674577368486937482}
   - component: {fileID: 5599721692680652259}
   - component: {fileID: 1833006414014950528}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rocks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 6930966846130805830}
   - component: {fileID: 2278517009059803052}
   - component: {fileID: 4227928960349492518}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 6650663396490102364}
   - component: {fileID: 7774405420461017593}
   - component: {fileID: 5476601189428870451}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Resources_Crystal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   - component: {fileID: 9206572816190507353}
   - component: {fileID: 442602357019858748}
   - component: {fileID: 2565399962154666609}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: crystal 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

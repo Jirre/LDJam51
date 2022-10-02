@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using JvLib.Services;
-using Project.Buildings;
 using UnityEngine;
 
 namespace Project.Gameplay
 {
     [ServiceInterface]
-    public class GameplayServiceManager : MonoBehaviour, IService
+    public partial class GameplayServiceManager : MonoBehaviour, IService
     {
         public bool IsServiceReady { get; private set; }
 
         private void Awake()
         {
+            ServiceLocator.Instance.Register(this);
             IsServiceReady = true;
+            InitBuildSettings();
         }
 
         public void StartGame()
@@ -28,6 +28,7 @@ namespace Project.Gameplay
 
         private void Update()
         {
+            BuildMouseOver();
             if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
             {
                 List<List<Vector2Int>> paths = Svc.World.Paths;

@@ -31,7 +31,7 @@ namespace Project.Generation
             
             _generators = new List<WorldGenerator>();
             _generators.Add(new WorldGenerator(Vector2Int.zero, 0));
-            _cells.Add(Vector2Int.zero, new WorldCell(Vector2Int.zero, transform, 0));
+            _cells.Add(Vector2Int.zero, new WorldCell(Vector2Int.zero, transform));
             _stateMachine.GotoState(EStates.GenerateGround);
         }
         
@@ -51,8 +51,7 @@ namespace Project.Generation
                         _cells.Add(
                             rPos, 
                             new WorldCell(rPos, 
-                            transform, 
-                            _generators[i].StepCount + cost));
+                            transform));
 
                     MinCoordinate = new Vector2Int(
                         Mathf.Min(MinCoordinate.x, rPos.x),
@@ -88,11 +87,60 @@ namespace Project.Generation
             }
 
             if (_generators.Count != 0) return;
+            pState.GotoState(EStates.ResourcePlacing);
+        }
+        
+        private void GenerateResourcesState(EventState<EStates> pState)
+        {
+            float[,] woods = _woodNoiseGenerator.CalcArray(
+                new float2(MinCoordinate.x, MinCoordinate.y),
+                new Vector2Int(
+                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
+                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
+            
+            float[,] mountains = _mountainNoiseGenerator.CalcArray(
+                new float2(MinCoordinate.x, MinCoordinate.y),
+                new Vector2Int(
+                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
+                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
+
+            float crystalChance = _Config.CrystalChance;
+            
+            foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
+            {
+                if (cell.Value.Content != EWorldCellContent.Empty)
+                    continue;
+                
+                int aX = Mathf.Abs(MinCoordinate.x) + cell.Key.x;
+                int aY = Mathf.Abs(MinCoordinate.y) + cell.Key.y;
+                float mV = mountains[aX, aY];
+                
+                if (mV >= 100f - _Config.MountainThreshold)
+                {
+                    if (Random.Range(0, 100) < crystalChance)
+                    {
+                        cell.Value.SetContent(EWorldCellContent.Crystals);
+                        crystalChance += _Config.CrystalPerCrystalChance;
+                        continue;
+                    }
+                    cell.Value.SetContent(EWorldCellContent.Stones);
+                    crystalChance += _Config.CrystalPerStoneChance;
+                    continue;
+                }
+                
+                float fV = woods[aX, aY];
+                if (fV < 100 - _Config.ForestChance) continue;
+                cell.Value.SetContent(EWorldCellContent.Trees);
+            }
+            
             pState.GotoState(EStates.Pathing);
         }
         
         private void PathingState(EventState<EStates> pState)
         {
+            ResetPathingCost();
+            SetPathingCost(Vector2Int.zero, 0);
+            
             int paths = Random.Range(1, Mathf.Max(1, _Config.MaxRoads + 1));
             List<Vector2Int> spawnPoints = _endPoints.OrderByDescending(x =>
                 _cells[x].Cost).ToList();
@@ -130,55 +178,39 @@ namespace Project.Generation
                 _paths.Add(steps);
             }
 
-            pState.GotoState(EStates.ResourcePlacing);
-        }
-        
-        private void GenerateResourcesState(EventState<EStates> pState)
-        {
-            float[,] woods = _woodNoiseGenerator.CalcArray(
-                new float2(MinCoordinate.x, MinCoordinate.y),
-                new Vector2Int(
-                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
-                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
-            
-            float[,] mountains = _mountainNoiseGenerator.CalcArray(
-                new float2(MinCoordinate.x, MinCoordinate.y),
-                new Vector2Int(
-                    Mathf.Abs(MinCoordinate.x) + MaxCoordinate.x + 1,
-                    Mathf.Abs(MinCoordinate.y) + MaxCoordinate.y + 1));
-
-            float _crystalChance = _Config.CrystalChance;
-            
-            foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
-            {
-                if (cell.Value.Content != EWorldCellContent.Empty)
-                    continue;
-                
-                int aX = Mathf.Abs(MinCoordinate.x) + cell.Key.x;
-                int aY = Mathf.Abs(MinCoordinate.y) + cell.Key.y;
-                float mV = mountains[aX, aY];
-                
-                if (mV >= 100f - _Config.MountainThreshold)
-                {
-                    if (Random.Range(0, 100) < _crystalChance)
-                    {
-                        cell.Value.SetContent(EWorldCellContent.Crystals);
-                        _crystalChance += _Config.CrystalPerCrystalChance;
-                        continue;
-                    }
-                    cell.Value.SetContent(EWorldCellContent.Stones);
-                    _crystalChance += _Config.CrystalPerStoneChance;
-                    continue;
-                }
-                
-                float fV = woods[aX, aY];
-                if (fV < 100 - _Config.ForestChance) continue;
-                cell.Value.SetContent(EWorldCellContent.Trees);
-            }
-            
             pState.GotoState(EStates.Rendering);
         }
+
+        private void ResetPathingCost()
+        {
+            foreach (WorldCell c in _cells.Values)
+            {
+                c.SetCost(int.MaxValue);
+            }
+        }
         
+        private void SetPathingCost(Vector2Int pPos, int pCost)
+        {
+            List<WorldCell> cells = GetNeighbors(pPos).ToList();
+            _cells[pPos].SetCost(pCost);
+            foreach (WorldCell c in cells)
+            {
+                int nCost = c.Content switch
+                {
+                    EWorldCellContent.Base => 0,
+                    EWorldCellContent.Empty => pCost + 1,
+                    EWorldCellContent.Road => pCost + 1,
+                    EWorldCellContent.Spawn => int.MaxValue,
+                    EWorldCellContent.Building => int.MaxValue,
+                    _ => pCost + 100
+                };
+                if (c.Cost > nCost)
+                {
+                    SetPathingCost(c.Position, nCost);
+                }
+            }
+        }
+
         private void RenderingState(EventState<EStates> pState)
         {
             foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
@@ -206,7 +238,7 @@ namespace Project.Generation
                         position = Vector3.zero
                     }
                 };
-                obj.AddComponent<BuildingController>().SetConfig(BuildingConfig.Base_01);
+                obj.AddComponent<BuildingBehaviour>().SetConfig(BuildingConfig.Base_01);
             }
             pState.GotoState(EStates.Complete);
         }

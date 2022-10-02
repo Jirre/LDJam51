@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2046bb7b34dc6f458d327b577f82229, type: 3}
+  m_Name: Mage_01
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
+  _Guid: 579c450cc3477b246bdaafc7d1c6c09f
+  name: Mage_01
+  _Name: Mage Tower I
+  _CanBeDemolished: 0
+  _AllowedCells: 00000000
+  _Base: {fileID: 4158632184947092657, guid: 993708b367fd31f42af52ee7d98acc21, type: 3}
+  _Middle: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}
+  _Top: {fileID: 0}
+  _Weapon: {fileID: 0}

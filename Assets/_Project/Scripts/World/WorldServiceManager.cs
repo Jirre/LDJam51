@@ -30,14 +30,21 @@ namespace Project.Generation
 
         private List<WorldGenerator> _generators;
         private Dictionary<Vector2Int, WorldCell> _cells;
+        public bool TryGetCell(Vector2Int pCoordinate, out WorldCell pCell)
+        {
+            pCell = null;
+            if (!_cells.ContainsKey(pCoordinate)) return false;
+            
+            pCell = _cells[pCoordinate];
+            return true;
+
+        }
 
         private List<Vector2Int> _endPoints;
 
         public Vector2Int MinCoordinate { get; private set; }
         public Vector2Int MaxCoordinate { get; private set; }
 
-        
-        
 
         private enum EStates
         {
