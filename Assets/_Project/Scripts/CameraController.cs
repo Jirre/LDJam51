@@ -1,4 +1,3 @@
-using System;
 using JvLib.Services;
 using UnityEngine;
 
@@ -38,12 +37,12 @@ namespace Project.Input
 
         private void Start()
         {
-            Svc.Generator.OnBuildFinish += ChangeBounds;
+            Svc.World.OnBuildFinish += ChangeBounds;
         }
 
         private void OnDestroy()
         {
-            Svc.Generator.OnBuildFinish -= ChangeBounds;
+            Svc.World.OnBuildFinish -= ChangeBounds;
         }
 
         private void Update()
@@ -80,8 +79,8 @@ namespace Project.Input
 
         private void ChangeBounds()
         {
-            _minBound = Svc.Generator.MinCoordinate - Vector2.one * _boundBuffer;
-            _maxBound = Svc.Generator.MaxCoordinate + Vector2.one * _boundBuffer;
+            _minBound = Svc.World.MinCoordinate - Vector2.one * _boundBuffer;
+            _maxBound = Svc.World.MaxCoordinate + Vector2.one * _boundBuffer;
         }
     }
 }

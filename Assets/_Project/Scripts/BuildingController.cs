@@ -7,9 +7,9 @@ namespace Project.Buildings
     {
         [SerializeField] private BuildingConfig _Config;
 
-        private const float BASE_HEIGHT = 0f;
-        private const float MIDDLE_HEIGHT = 0.5f;
-        private const float TOP_HEIGHT = 1f;
+        private const float BASE_HEIGHT = .2f;
+        private const float MIDDLE_HEIGHT = 0.7f;
+        private const float TOP_HEIGHT = 1.2f;
 
         private const float DROP_HEIGHT = 2f;
         private const float DROP_DELAY = 0.5f;

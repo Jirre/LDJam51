@@ -1,9 +1,8 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using JvLib.Events;
-using JvLib.Generation.Noise;
-using JvLib.Services;
 using Project.Buildings;
 using Unity.Mathematics;
 using UnityEngine;
@@ -11,27 +10,8 @@ using Random = UnityEngine.Random;
 
 namespace Project.Generation
 {
-    [ServiceInterface(Name = "Generator")]
-    public class WorldGeneratorServiceManager : MonoBehaviour, IService
+    public partial class WorldServiceManager //Generation
     {
-        [SerializeField] private WorldGeneratorConfig _Config;
-        private float _maxCells;
-
-        private NoiseHash _woodHash;
-        private SimplexNoise2D _woodNoiseGenerator;
-        private NoiseHash _mountainHash;
-        private SimplexNoise2D _mountainNoiseGenerator;
-
-        public bool IsServiceReady { get; private set; }
-
-        private List<WorldGenerator> _generators;
-        private Dictionary<Vector2Int, WorldCell> _cells;
-
-        private List<Vector2Int> _endPoints;
-
-        public Vector2Int MinCoordinate { get; private set; }
-        public Vector2Int MaxCoordinate { get; private set; }
-
         private SafeEvent _onBuildFinish = new SafeEvent();
         public event Action OnBuildFinish
         {
@@ -39,75 +19,22 @@ namespace Project.Generation
             remove => _onBuildFinish -= value;
         }
 
-        private enum EStates
+        private bool _isFreshWorld;
+
+        public void Generate(Vector2Int pPosition)
         {
-            Init,
-            GenerateGround,
-            Pathing,
-            ResourcePlacing,
-            Rendering,
+            if (!_stateMachine.IsCurrentState(EStates.Init) &&
+                !_stateMachine.IsCurrentState(EStates.Complete))
+                throw new Exception("Can't start construction of a new world while another build is in progress");
             
-            Complete,
-        }
-
-        private EventStateMachine<EStates> _stateMachine;
-
-        private void Awake()
-        {
-            ServiceLocator.Instance.Register(this);
-            IsServiceReady = true;
-
-            _stateMachine = new EventStateMachine<EStates>(nameof(WorldGeneratorServiceManager));
-            _stateMachine.Add(EStates.Init, InitState);
-            _stateMachine.Add(EStates.GenerateGround, GenerateGroundState);
-            _stateMachine.Add(EStates.Pathing, PathingState);
-            _stateMachine.Add(EStates.ResourcePlacing, GenerateResourcesState);
-            _stateMachine.Add(EStates.Rendering, RenderingState);
-            _stateMachine.Add(EStates.Complete, CompleteState);
-
-            _stateMachine.GotoState(EStates.Init);
-        }
-
-        private void Update()
-        {
-            _stateMachine.Update();
-        }
-
-        private void InitState(EventState<EStates> pState)
-        {
-            Random.InitState((int)DateTime.Now.Ticks);
-
-            _cells = new Dictionary<Vector2Int, WorldCell>();
             _endPoints = new List<Vector2Int>();
             
             _generators = new List<WorldGenerator>();
             _generators.Add(new WorldGenerator(Vector2Int.zero, 0));
             _cells.Add(Vector2Int.zero, new WorldCell(Vector2Int.zero, transform, 0));
-
-            _maxCells = _Config.MaxFloors;
-
-            _woodHash = NoiseHash.Generate((int)DateTime.Now.Ticks, 128);
-            _woodNoiseGenerator = new SimplexNoise2D(
-                _woodHash,
-                _Config.NoiseFrequency,
-                _Config.NoiseOctaves,
-                _Config.NoiseLacunarity,
-                _Config.NoisePersistence,
-                0f, 100f);
-            
-            _mountainHash = NoiseHash.Generate(int.MaxValue - (int)DateTime.Now.Ticks, 128);
-            _mountainNoiseGenerator = new SimplexNoise2D(
-                _mountainHash,
-                _Config.NoiseFrequency,
-                _Config.NoiseOctaves,
-                _Config.NoiseLacunarity,
-                _Config.NoisePersistence,
-                0f, 100f);
-            
-            Debug.Log(DateTime.Now.ToString("HH:mm:ss.ffffff") + ": Starting build process!");
-            pState.GotoState(EStates.GenerateGround);
+            _stateMachine.GotoState(EStates.GenerateGround);
         }
-
+        
         private void GenerateGroundState(EventState<EStates> pState)
         {
             int count = _generators.Count;
@@ -161,11 +88,9 @@ namespace Project.Generation
             }
 
             if (_generators.Count != 0) return;
-            
-            Debug.Log(DateTime.Now.ToString("HH:mm:ss.ffffff") + ": Generate complete!");
             pState.GotoState(EStates.Pathing);
         }
-
+        
         private void PathingState(EventState<EStates> pState)
         {
             int paths = Random.Range(1, Mathf.Max(1, _Config.MaxRoads + 1));
@@ -182,7 +107,7 @@ namespace Project.Generation
                 }
                 
                 _cells[pos].SetContent(EWorldCellContent.Spawn);
-                
+                List<Vector2Int> steps = new() {pos};
                 while (pos != Vector2Int.zero)
                 {
                     Vector2Int previousPos = pos;
@@ -198,12 +123,16 @@ namespace Project.Generation
                     _cells[pos].SetContent(EWorldCellContent.Road);
                     if (pos == previousPos)
                         break;
+                    
+                    steps.Add(pos);
                 }
+                
+                _paths.Add(steps);
             }
 
             pState.GotoState(EStates.ResourcePlacing);
         }
-
+        
         private void GenerateResourcesState(EventState<EStates> pState)
         {
             float[,] woods = _woodNoiseGenerator.CalcArray(
@@ -249,7 +178,7 @@ namespace Project.Generation
             
             pState.GotoState(EStates.Rendering);
         }
-
+        
         private void RenderingState(EventState<EStates> pState)
         {
             foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
@@ -266,27 +195,20 @@ namespace Project.Generation
 
             _onBuildFinish.Dispatch();
 
-            GameObject obj = new GameObject("Base");
-            obj.transform.position = Vector3.zero;
-            obj.AddComponent<BuildingController>().SetConfig(BuildingConfig.Base_01);
-
+            if (_isFreshWorld)
+            {
+                _isFreshWorld = false;
+                
+                GameObject obj = new("Base")
+                {
+                    transform =
+                    {
+                        position = Vector3.zero
+                    }
+                };
+                obj.AddComponent<BuildingController>().SetConfig(BuildingConfig.Base_01);
+            }
             pState.GotoState(EStates.Complete);
-        }
-        
-        private void CompleteState(EventState<EStates> pState)
-        {
-            //FlagState
-        }
-
-        private IEnumerable<WorldCell> GetNeighbors(Vector2Int pPosition)
-        {
-            List<WorldCell> cells = new();
-            if (_cells.ContainsKey(pPosition + Vector2Int.right)) cells.Add(_cells[pPosition + Vector2Int.right]);
-            if (_cells.ContainsKey(pPosition + Vector2Int.up)) cells.Add(_cells[pPosition + Vector2Int.up]);
-            if (_cells.ContainsKey(pPosition + Vector2Int.left)) cells.Add(_cells[pPosition + Vector2Int.left]);
-            if (_cells.ContainsKey(pPosition + Vector2Int.down)) cells.Add(_cells[pPosition + Vector2Int.down]);
-
-            return cells.ToArray();
         }
     }
 }

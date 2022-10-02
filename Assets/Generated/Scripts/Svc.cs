@@ -8,8 +8,8 @@ namespace JvLib.Services
         {
             public static ServiceReference<Project.Gameplay.GameplayServiceManager> GameplayServiceManager
                  = new ServiceReference<Project.Gameplay.GameplayServiceManager>();
-            public static ServiceReference<Project.Generation.WorldGeneratorServiceManager> Generator
-                 = new ServiceReference<Project.Generation.WorldGeneratorServiceManager>();
+            public static ServiceReference<Project.Generation.WorldServiceManager> World
+                 = new ServiceReference<Project.Generation.WorldServiceManager>();
         }
 
         public static Project.Gameplay.GameplayServiceManager GameplayServiceManager
@@ -19,11 +19,11 @@ namespace JvLib.Services
                 return Ref.GameplayServiceManager.Reference;
             }
         }
-        public static Project.Generation.WorldGeneratorServiceManager Generator
+        public static Project.Generation.WorldServiceManager World
         {
             get
             {
-                return Ref.Generator.Reference;
+                return Ref.World.Reference;
             }
         }
 
@@ -31,7 +31,7 @@ namespace JvLib.Services
         private static void ClearCache()
         {
             Ref.GameplayServiceManager = new ServiceReference<Project.Gameplay.GameplayServiceManager>();
-            Ref.Generator = new ServiceReference<Project.Generation.WorldGeneratorServiceManager>();
+            Ref.World = new ServiceReference<Project.Generation.WorldServiceManager>();
         }
     }
 }

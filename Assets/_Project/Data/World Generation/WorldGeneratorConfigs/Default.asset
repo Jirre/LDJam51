@@ -26,6 +26,15 @@ MonoBehaviour:
   _AddedSpawnChance: -2
   _BaseRemoveChance: -2
   _AddedRemoveChance: 2
+  _Frequency: 2
+  _Octaves: 2
+  _Lacunarity: 2
+  _Persistence: 0.5
+  _ForestChance: 40
+  _MountainThreshold: 35
+  _CrystalChance: 15
+  _CrystalPerCrystalChance: -10
+  _CrystalPerStoneChance: 2
   _MaxFloors: 200
   _MaxRoads: 1
   _MinRoadLength: 8
