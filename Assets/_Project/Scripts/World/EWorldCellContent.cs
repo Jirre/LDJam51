@@ -2,9 +2,10 @@
 {
     public enum EWorldCellContent
     {
-        Empty = 0,
-        Obstacle = 1,
+        Unassigned = -1,
         
+        Empty = 0,
+
         Road = 2,
         Spawn = 3,
         

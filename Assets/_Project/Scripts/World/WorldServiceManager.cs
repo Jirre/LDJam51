@@ -110,7 +110,7 @@ namespace Project.Generation
                 _Config.NoisePersistence,
                 0f, 100f);
             
-            Generate(Vector2Int.zero);
+            Generate(Vector2Int.zero, 0);
         }
 
         private void CompleteState(EventState<EStates> pState)

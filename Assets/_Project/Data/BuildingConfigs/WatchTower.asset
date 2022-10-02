@@ -9,17 +9,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2046bb7b34dc6f458d327b577f82229, type: 3}
+  m_Script: {fileID: 11500000, guid: d21441f9dfaa4f2298e73a5b3810805b, type: 3}
   m_Name: WatchTower
   m_EditorClassIdentifier: 
   _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
-  _Guid: 89abf75b3696d8a42a304529e16aae83
+  _Guid: 882688c83e2b44d41aab93bf73eca7b4
   name: WatchTower
   _Name: Watch Tower
-  _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
+  _BuildingPrototype: {fileID: 6871228221841471037, guid: 86e6a1b9ae6e985419ceb430b34ce07e, type: 3}
   _CanBeDemolished: 0
   _AllowedCells: 00000000
+  _Costs:
+  - _Resource: 0
+    _Amount: 150
+  - _Resource: 1
+    _Amount: 100
+  - _Resource: 2
+    _Amount: 85
   _Base: {fileID: 7928653028014927736, guid: ae9617f088165a94aad61f85ecf831c5, type: 3}
   _Middle: {fileID: 7928653028014927736, guid: ae9617f088165a94aad61f85ecf831c5, type: 3}
   _Top: {fileID: 3195227170382310279, guid: d2ecbbca5536ddb4cb8eb318c00761e9, type: 3}
   _Weapon: {fileID: 0}
+  _AddedCells: 50

@@ -108,6 +108,12 @@ namespace Project.Gameplay
             if (!Svc.World.TryGetCell(pPosition, out WorldCell cell) ||
                 !_selectedBuildConfig.IsCellAllowed(cell.Content)) return false;
 
+            if (!TrySpendResource(_selectedBuildConfig.Costs))
+            {
+                SelectBuildConfig(null);
+                return false;
+            }
+            
             GameObject obj = Instantiate(_selectedBuildConfig.Prototype.gameObject);
             obj.transform.position = new Vector3(pPosition.x, 0f, pPosition.y);
             

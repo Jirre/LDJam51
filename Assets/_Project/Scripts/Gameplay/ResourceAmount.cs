@@ -1,14 +1,20 @@
-﻿namespace Project.Gameplay
+﻿using System;
+using UnityEngine;
+
+namespace Project.Gameplay
 {
+    [Serializable]
     public struct ResourceAmount
     {
-        public EResources Resource { get; }
-        public int Amount { get; }
+        [SerializeField] private EResources _Resource;
+        public EResources Resource => _Resource;
+        [SerializeField] private int _Amount;
+        public int Amount => _Amount;
 
         public ResourceAmount(EResources pResources, int pAmount)
         {
-            Resource = pResources;
-            Amount = pAmount;
+            _Resource = pResources;
+            _Amount = pAmount;
         }
     }
 }

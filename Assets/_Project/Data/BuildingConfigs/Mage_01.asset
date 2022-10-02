@@ -19,6 +19,13 @@ MonoBehaviour:
   _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
   _CanBeDemolished: 1
   _AllowedCells: 00000000
+  _Costs:
+  - _Resource: 0
+    _Amount: 40
+  - _Resource: 1
+    _Amount: 60
+  - _Resource: 2
+    _Amount: 30
   _Base: {fileID: 4158632184947092657, guid: 993708b367fd31f42af52ee7d98acc21, type: 3}
   _Middle: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}
   _Top: {fileID: 0}

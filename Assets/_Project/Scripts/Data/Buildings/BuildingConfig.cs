@@ -1,4 +1,5 @@
 using JvLib.Data;
+using Project.Gameplay;
 using Project.Generation;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -10,9 +11,12 @@ namespace Project.Buildings
         [SerializeField] private string _Name;
         [SerializeField] private BuildingBehaviour _BuildingPrototype;
         public BuildingBehaviour Prototype => _BuildingPrototype;
-        
+
         [SerializeField] private bool _CanBeDemolished;
         [SerializeField] private EWorldCellContent[] _AllowedCells;
+        
+        [SerializeField] private ResourceAmount[] _Costs;
+        public ResourceAmount[] Costs => _Costs;
 
         public bool IsCellAllowed(EWorldCellContent pContent)
         {

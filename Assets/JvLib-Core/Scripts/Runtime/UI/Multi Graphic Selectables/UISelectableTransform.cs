@@ -1,5 +1,6 @@
 ﻿using JvLib.Utilities;
 using System;
+using DG.Tweening;
 using UnityEngine;
 
 namespace JvLib.UI
@@ -137,7 +138,7 @@ namespace JvLib.UI
                 return;
 
             //TODO JV: Make Tween
-            _targetTransform.rotation = Quaternion.Euler(targetRotation);
+            _targetTransform.DORotate(targetRotation, 0.25f);
         }
         private void StartScaleTween(Vector3 targetScale, bool instant)
         {

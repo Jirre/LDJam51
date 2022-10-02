@@ -21,17 +21,19 @@ namespace Project.Generation
 
         private bool _isFreshWorld;
 
-        public void Generate(Vector2Int pPosition)
+        public void Generate(Vector2Int pPosition, int pAddedMaxCells)
         {
             if (!_stateMachine.IsCurrentState(EStates.Init) &&
                 !_stateMachine.IsCurrentState(EStates.Complete))
                 throw new Exception("Can't start construction of a new world while another build is in progress");
-            
+
+            _maxCells += pAddedMaxCells;
             _endPoints = new List<Vector2Int>();
             
             _generators = new List<WorldGenerator>();
-            _generators.Add(new WorldGenerator(Vector2Int.zero, 0));
-            _cells.Add(Vector2Int.zero, new WorldCell(Vector2Int.zero, transform));
+            _generators.Add(new WorldGenerator(pPosition, 0));
+            if (!_cells.ContainsKey(pPosition))
+                _cells.Add(Vector2Int.zero, new WorldCell(pPosition, transform));
             _stateMachine.GotoState(EStates.GenerateGround);
         }
         
@@ -108,7 +110,7 @@ namespace Project.Generation
             
             foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
             {
-                if (cell.Value.Content != EWorldCellContent.Empty)
+                if (cell.Value.Content != EWorldCellContent.Unassigned)
                     continue;
                 
                 int aX = Mathf.Abs(MinCoordinate.x) + cell.Key.x;
@@ -129,10 +131,14 @@ namespace Project.Generation
                 }
                 
                 float fV = woods[aX, aY];
-                if (fV < 100 - _Config.ForestChance) continue;
-                cell.Value.SetContent(EWorldCellContent.Trees);
+                if (fV >= 100 - _Config.ForestChance)
+                {
+                    cell.Value.SetContent(EWorldCellContent.Trees);
+                    continue;
+                }
+                
+                cell.Value.SetContent(EWorldCellContent.Empty);
             }
-            
             pState.GotoState(EStates.Pathing);
         }
         
@@ -198,7 +204,7 @@ namespace Project.Generation
                 int nCost = c.Content switch
                 {
                     EWorldCellContent.Base => 0,
-                    EWorldCellContent.Empty => pCost + 1,
+                    EWorldCellContent.Empty => pCost + 2,
                     EWorldCellContent.Road => pCost + 1,
                     EWorldCellContent.Spawn => int.MaxValue,
                     EWorldCellContent.Building => int.MaxValue,
@@ -215,6 +221,9 @@ namespace Project.Generation
         {
             foreach (KeyValuePair<Vector2Int, WorldCell> cell in _cells)
             {
+                if (cell.Value.Content == EWorldCellContent.Building)
+                    continue;
+                
                 GroundConfig config = GroundConfigs.GetConfig(cell.Value.Content);
                 byte context = 0;
                 if (_cells.ContainsKey(cell.Key + Vector2Int.right) && config.DoesConnect(_cells[cell.Key + Vector2Int.right].Content)) context += 1;
