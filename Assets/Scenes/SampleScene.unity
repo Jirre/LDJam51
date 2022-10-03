@@ -168,7 +168,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1824923027}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4898,7 +4899,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 2147483647
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5745,7 +5746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Context: {fileID: 0}
-  _TargetConfig: {fileID: 11400000, guid: 64afad7ada6e00c4abd7428f88ed53ba, type: 2}
+  _TargetConfig: {fileID: 11400000, guid: 1455e4ff27de3f8498bb3cf4c2ed7236, type: 2}
   _ImageVisualizer: {fileID: 1239852074}
   _OnDefault: {fileID: 21300000, guid: 29707d1811dec34458baf4f43ba6aec7, type: 3}
   _OnSelected: {fileID: 21300000, guid: dddf00401a0e5f4438b996d96bf5c080, type: 3}
@@ -7325,6 +7326,56 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _ImageField: {fileID: 1447249505}
+--- !u!1 &1824923026
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1824923027}
+  - component: {fileID: 1824923028}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1824923027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824923026}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 24919946}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1824923028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1824923026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f52f54a5e6fab643a75c47d8a52bb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Data:
+  - _Id: P_Arrow
+    _Source: {fileID: 3259815129848761658, guid: 0c9a5c1e5be227442acf43aec90449dd, type: 3}
+    _Buffer: 32
+    _GroupId: 
+    _GroupWeight: 0
 --- !u!1 &1825892895
 GameObject:
   m_ObjectHideFlags: 0

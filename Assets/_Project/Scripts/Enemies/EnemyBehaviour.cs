@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using JvLib.Services;
@@ -15,6 +16,7 @@ namespace Project.Enemies
         private Vector2Int[] _path;
 
         private int _targetIndex;
+        public int TargetIndex => _targetIndex;
         private Vector3 _current;
         private Vector3 _target;
         private float _lerp;
@@ -74,7 +76,13 @@ namespace Project.Enemies
             if (_health > 0) return;
             
             _isDead = true;
+            StartCoroutine(DeathRoutine());
+        }
+
+        private IEnumerator DeathRoutine()
+        {
             _animator.SetBool("IsDead", true);
+            yield return new WaitForSeconds(1f);
             transform.DOMoveY(DEATH_DEPTH, DEATH_DURATION);
             Destroy(gameObject, DEATH_DURATION + 1f);
         }

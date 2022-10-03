@@ -7,3 +7,6 @@
 [submodule "Assets/JvLib-Generation"]
 	path = Assets/JvLib-Generation
 	url = https://github.com/Jirre/JvLib-Generation.git
+[submodule "Assets/JvLib-Pooling"]
+	path = Assets/JvLib-Pooling
+	url = https://github.com/Jirre/JvLib-Pooling.git

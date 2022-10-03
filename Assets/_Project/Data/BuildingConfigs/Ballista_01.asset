@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2046bb7b34dc6f458d327b577f82229, type: 3}
+  m_Script: {fileID: 11500000, guid: 496291f577aa477db15b26024182fde9, type: 3}
   m_Name: Ballista_01
   m_EditorClassIdentifier: 
   _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
-  _Guid: 64afad7ada6e00c4abd7428f88ed53ba
+  _Guid: 1455e4ff27de3f8498bb3cf4c2ed7236
   name: Ballista_01
   _Name: Ballista Tower I
-  _BuildingPrototype: {fileID: 7439766895561000895, guid: ff011ba0bdbb065458cddea7a21f8440, type: 3}
+  _BuildingPrototype: {fileID: 863895878890487163, guid: 73067809fec2a334983f1f6d5032b921, type: 3}
   _CanBeDemolished: 1
   _AllowedCells: 00000000
   _Costs:
@@ -28,3 +28,7 @@ MonoBehaviour:
   _Middle: {fileID: 6680353027674912844, guid: 1f944f6a538693347a90930b5e18ba18, type: 3}
   _Top: {fileID: 0}
   _Weapon: {fileID: 2437050361100009390, guid: 612c0233d347d704ca53406a2c98049f, type: 3}
+  _Cooldown: 2
+  _ProjectileID: P_Arrow
+  _Damage: 5
+  _Range: 5
