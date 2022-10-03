@@ -51,6 +51,8 @@ namespace Project.Gameplay
         public void Damage(float pDamage)
         {
             _health -= pDamage;
+            if (pDamage > 0)
+                Svc.Audio.Damage();
             _onDamageTaken.Dispatch();
         }
     }

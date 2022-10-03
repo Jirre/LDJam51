@@ -3,6 +3,7 @@ using DG.Tweening;
 using JvLib.Services;
 using Project.Gameplay;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Project.Audio
 {
@@ -13,6 +14,13 @@ namespace Project.Audio
 
         [SerializeField] private AudioSource _ClickSource;
         [SerializeField] private AudioSource _PlaceSource;
+        [SerializeField] private AudioSource _VoiceSource;
+
+        [SerializeField] private AudioClip[] _DamageClips;
+        [SerializeField] private AudioClip[] _ResourceClips;
+        
+        [SerializeField] private float _DamageTimeout;
+        private float _damageTimer;
 
         [Space] 
         [SerializeField] private AudioSource _MusicSource;
@@ -40,6 +48,11 @@ namespace Project.Audio
         private void OnDestroy()
         {
             Svc.Gameplay.OnGameStateChange -= OnStateChange;
+        }
+
+        private void Update()
+        {
+            _damageTimer -= Time.deltaTime;
         }
 
         private void OnStateChange(EGameStates pState)
@@ -86,6 +99,23 @@ namespace Project.Audio
         public void Place()
         {
             _PlaceSource.Play();
+        }
+
+        public void Damage()
+        {
+            if (_damageTimer > 0 || _VoiceSource.isPlaying) return;
+            
+            _VoiceSource.clip = _DamageClips[Random.Range(0, _DamageClips.Length)];
+            _VoiceSource.Play();
+            _damageTimer = _DamageTimeout;
+        }
+
+        public void Resources()
+        {
+            if (_VoiceSource.isPlaying) return;
+            
+            _VoiceSource.clip = _ResourceClips[Random.Range(0, _ResourceClips.Length)];
+            _VoiceSource.Play();
         }
     }
 }

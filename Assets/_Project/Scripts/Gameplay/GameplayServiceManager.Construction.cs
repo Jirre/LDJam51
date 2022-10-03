@@ -80,6 +80,12 @@ namespace Project.Gameplay
             if (_selectedBuildConfig == null)
                 return;
 
+            if (UnityEngine.Input.GetKeyDown(KeyCode.Escape) || UnityEngine.Input.GetMouseButtonDown(1))
+            {
+                SelectBuildConfig(null);
+                return;
+            }
+
             Ray ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
             if (_plane.Raycast(ray, out float enter))
             {
@@ -110,6 +116,7 @@ namespace Project.Gameplay
 
             if (!TrySpendResource(_selectedBuildConfig.Costs))
             {
+                Svc.Audio.Resources();
                 SelectBuildConfig(null);
                 return false;
             }
