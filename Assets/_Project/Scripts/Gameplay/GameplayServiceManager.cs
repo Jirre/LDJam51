@@ -10,7 +10,7 @@ namespace Project.Gameplay
     {
         public bool IsServiceReady { get; private set; }
 
-        private const string VOTE_URL = "";
+        private const string VOTE_URL = "https://ldjam.com/events/ludum-dare/51/rightful";
         
         [SerializeField] private GameConfig _Config;
         

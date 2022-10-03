@@ -63,11 +63,11 @@ namespace Project.Input
             
             Vector2 mousePos = _camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
 
-            bool lKey = UnityEngine.Input.GetKey(KeyCode.A);
-            bool rKey = UnityEngine.Input.GetKey(KeyCode.D);
+            bool lKey = UnityEngine.Input.GetKey(KeyCode.A) || UnityEngine.Input.GetKey(KeyCode.LeftArrow);
+            bool rKey = UnityEngine.Input.GetKey(KeyCode.D) || UnityEngine.Input.GetKey(KeyCode.RightArrow);
             
-            bool uKey = UnityEngine.Input.GetKey(KeyCode.W);
-            bool dKey = UnityEngine.Input.GetKey(KeyCode.S);
+            bool uKey = UnityEngine.Input.GetKey(KeyCode.W) || UnityEngine.Input.GetKey(KeyCode.UpArrow);
+            bool dKey = UnityEngine.Input.GetKey(KeyCode.S) || UnityEngine.Input.GetKey(KeyCode.DownArrow);
 
             Vector3 pos = transform.position;
             pos += 

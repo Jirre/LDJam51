@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c007c93c5f4043df89c3ef8c31a2d168, type: 3}
+  m_Name: Ghost_01
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 3a5449d13a125fb47a86022c7fbf4c31, type: 2}
+  _Guid: 2ce309fd4142d6248a635773a391aee7
+  name: Ghost_01
+  _Prefab: {fileID: 7451583623941485109, guid: 01b39f9980b6e0242a74f77283537c0c, type: 3}
+  _Speed: 0.65
+  _BaseHealth: 1
+  _HealthMult: 1.015
+  _HealthMaxMult: 1.1
+  _Damage: 1

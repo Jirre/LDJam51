@@ -1958,6 +1958,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _DefaultDirection: 90
+  _health: 0
 --- !u!136 &3299993637352478926
 CapsuleCollider:
   m_ObjectHideFlags: 0
