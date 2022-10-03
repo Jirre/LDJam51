@@ -15,7 +15,7 @@ MonoBehaviour:
   _ParentObject: {fileID: 11400000, guid: 655a6e6b6d252ce47b060d32f18c3b18, type: 2}
   _Guid: 1455e4ff27de3f8498bb3cf4c2ed7236
   name: Ballista_01
-  _Name: Ballista Tower I
+  _Name: Ballista Tower
   _BuildingPrototype: {fileID: 863895878890487163, guid: 73067809fec2a334983f1f6d5032b921, type: 3}
   _CanBeDemolished: 1
   _AllowedCells: 00000000

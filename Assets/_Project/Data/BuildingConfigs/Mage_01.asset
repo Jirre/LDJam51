@@ -27,10 +27,10 @@ MonoBehaviour:
   - _Resource: 2
     _Amount: 30
   _Base: {fileID: 4158632184947092657, guid: 993708b367fd31f42af52ee7d98acc21, type: 3}
-  _Middle: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}
-  _Top: {fileID: 0}
+  _Middle: {fileID: 7234262564362963632, guid: 6dac85f624bdf8042962aeaf9c32d026, type: 3}
+  _Top: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}
   _Weapon: {fileID: 0}
   _Cooldown: 2.5
-  _ProjectileID: 
-  _Damage: 8
+  _ProjectileID: P_Magic
+  _Damage: 5
   _Range: 4

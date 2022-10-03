@@ -24,7 +24,7 @@ namespace Project.Enemies
 
         private Animator _animator;
 
-        private float _health;
+        [SerializeField] private float _health;
         private bool _isDead;
         public bool IsDead => _isDead;
 

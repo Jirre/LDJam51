@@ -11,26 +11,17 @@ namespace Project.Buildings
     {
         [SerializeField] private AnimationCurve _HeightCurve;
         [SerializeField] private float _Duration;
-        [SerializeField] private string _ParticleID;
-        [SerializeField] private Color _ParticleColor;
-        [SerializeField] private int _ParticleAmount;
         private ParticlePool _particlePool;
 
         private Vector3 _startPosition;
         protected Transform TargetTransform;
         protected Vector3 TargetPos;
         protected float Damage;
-        protected float BlastRadius;
         private float _lerp;
 
         private const float TARGET_OFFSET = 0.3f;
 
-        private void Awake()
-        {
-            _particlePool = Svc.ParticlePools.GetPool(_ParticleID);
-        }
-
-        public void Setup(Vector3 pStart, Transform pTarget, float pDamage, float pBlastRadius = 0f)
+        public void Setup(Vector3 pStart, Transform pTarget, float pDamage)
         {
             _lerp = 0;
             _startPosition = pStart;
@@ -38,7 +29,6 @@ namespace Project.Buildings
             TargetPos = pTarget.position;
             transform.LookAt(pTarget);
             Damage = pDamage;
-            BlastRadius = pBlastRadius;
         }
 
         private void Update()
@@ -48,10 +38,6 @@ namespace Project.Buildings
             if (_lerp >= 1)
             {
                 OnImpact();
-                if (_particlePool != null)
-                {
-                    _particlePool.Burst(TargetPos, _ParticleColor, _ParticleAmount);
-                }
                 Deactivate();
                 return;
             }

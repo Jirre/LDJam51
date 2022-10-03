@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using JvLib.Pooling.Objects;
 using JvLib.Services;
@@ -83,11 +82,13 @@ namespace Project.Buildings
 
             Transform tTransform = target.transform;
 
-            TurretTransform.eulerAngles = Vector3.up * MathUtility.DegPointDirection(
+            Quaternion rot = Quaternion.Euler(Vector3.up * -MathUtility.DegPointDirection(
                 new Vector2(TurretPosition.x, TurretPosition.z),
-                new Vector2(tTransform.position.x, tTransform.position.z));
+                new Vector2(tTransform.position.x, tTransform.position.z)));
             
-            GameObject obj = _pool.Activate(TurretPosition, TurretTransform.rotation);
+            if (TurretTransform != null) TurretTransform.rotation = rot;
+            GameObject obj = _pool.Activate(TurretPosition, rot);
+            
             obj.GetComponent<ProjectileBehaviour>().Setup(TurretPosition, tTransform, tConfig.Damage);
         }
 
