@@ -27,12 +27,22 @@ namespace Project.Gameplay
         {
             pCount = 1;
 
-            Wave[] waves = _Waves.Where(x =>
-                (pWave >= x.MinWave || x.MinWave <= 0) && (pWave <= x.MaxWave || x.MaxWave <= 0)).ToArray();
+            List<Wave> possibilities = new();
+            
+            foreach (Wave wave in _Waves)
+            {
+                if (wave.MinWave > pWave && wave.MinWave > 0)
+                    continue;
 
-            int index = Random.Range(0, waves.Length);
-            pCount = _Waves[index].Count;
-            return _Waves[index].Enemy;
+                if (wave.MaxWave < pWave && wave.MaxWave > 0)
+                    continue;
+                
+                possibilities.Add(wave);
+            }
+
+            int index = Random.Range(0, possibilities.Count);
+            pCount = possibilities[index].Count;
+            return possibilities[index].Enemy;
         }
 
         [Serializable]

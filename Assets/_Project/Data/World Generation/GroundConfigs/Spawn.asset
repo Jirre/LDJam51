@@ -17,7 +17,8 @@ MonoBehaviour:
   name: Spawn
   _ContentType: 3
   _AdditionalMatches: 02000000
-  _Default: {fileID: 1348564204691811820, guid: 108db88f2e6452a4c903df8ef39b0409, type: 3}
+  _Default: {fileID: 8714510001081986591, guid: 80e5fc2b6fd9cc644bc1e15f477ed629, type: 3}
+  _RandomRotation: 0
   _Variants:
   - Connections: 2
     _Prefab: {fileID: 8714510001081986591, guid: 80e5fc2b6fd9cc644bc1e15f477ed629, type: 3}

@@ -12,6 +12,7 @@ namespace Project.UI
         [SerializeField] private Animator _MenuAnimator;
         [SerializeField] private Animator _GameplayAnimator;
         [SerializeField] private Animator _PauseAnimator;
+        [SerializeField] private Animator _GameOverAnimator;
         
         private void Awake()
         {
@@ -34,6 +35,7 @@ namespace Project.UI
             _MenuAnimator.SetBool("Shown", pState is EGameStates.Init or EGameStates.Menu);
             _GameplayAnimator.SetBool("Shown", pState is EGameStates.Gameplay or EGameStates.Pause);
             _PauseAnimator.SetBool("Shown", pState == EGameStates.Pause);
+            _GameOverAnimator.SetBool("Shown", pState == EGameStates.GameOver);
         }
     }
 }

@@ -81,9 +81,12 @@ namespace Project.Gameplay
         {
             if (!pState.IsFistFrame)
                 return;
-            
+
+            _wave = 0;
             _timer = _TimerDuration;
             _health = _MaxHealth;
+            _onDamageTaken.Dispatch();
+            
             InitBuildSettings();
             InitResources();
             
@@ -149,7 +152,6 @@ namespace Project.Gameplay
                 _stateMachine.GotoState(EGameStates.Gameplay);
         }
         
-        //Flag State
         private void PauseState(EventState<EGameStates> pState)
         {
             if (!pState.IsFistFrame)
@@ -169,8 +171,7 @@ namespace Project.Gameplay
             
             _stateMachine.GotoState(EGameStates.GameOver);
         }
-
-        //Flag State
+        
         public void GameOverState(EventState<EGameStates> pState)
         {
             if (!pState.IsFistFrame)
@@ -181,6 +182,14 @@ namespace Project.Gameplay
             {
                 r.Stop();
             }
+        }
+
+        public void GotoMenu()
+        {
+            if (!_stateMachine.IsCurrentState(EGameStates.GameOver))
+                return;
+            
+            _stateMachine.GotoState(EGameStates.Menu);
         }
     }
 }
