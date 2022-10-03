@@ -22,10 +22,7 @@ namespace Project.Generation
         private SimplexNoise2D _woodNoiseGenerator;
         private NoiseHash _mountainHash;
         private SimplexNoise2D _mountainNoiseGenerator;
-
-        private List<List<Vector2Int>> _paths;
-        public List<List<Vector2Int>> Paths => _paths;
-
+        
         public bool IsServiceReady { get; private set; }
 
         private List<WorldGenerator> _generators;
@@ -80,13 +77,17 @@ namespace Project.Generation
             _stateMachine.Update();
         }
 
+        private void OnDestroy()
+        {
+            _woodHash.Dispose();
+            _mountainHash.Dispose();
+        }
+
         private void InitState(EventState<EStates> pState)
         {
             Random.InitState((int)DateTime.Now.Ticks);
 
             DOTween.SetTweensCapacity(250, 500);
-            
-            _paths = new List<List<Vector2Int>>();
             
             _isFreshWorld = true;
             _cells = new Dictionary<Vector2Int, WorldCell>();

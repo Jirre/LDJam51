@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using JvLib.Events;
 using JvLib.Services;
 using UnityEngine;
@@ -17,11 +16,28 @@ namespace Project.Gameplay
         [SerializeField] private float _TimerDuration = 10f;
         public float GetScaledTime() => _timer / _TimerDuration;
 
-        private SafeEvent _onTimerTick = new SafeEvent();
+        private int _wave;
+        public int Wave => _wave;
+        
+        private SafeEvent _onTimerTick = new();
         public event Action OnTimerTick
         {
             add => _onTimerTick += value;
             remove => _onTimerTick -= value;
+        }
+
+        private float _health;
+        public float Health => _health;
+        [SerializeField] private float _MaxHealth;
+        public float MaxHealth => _MaxHealth;
+
+        public float GetScaledHealth() => _health / _MaxHealth;
+        
+        private SafeEvent _onDamageTaken = new();
+        public event Action OnDamageTaken
+        {
+            add => _onDamageTaken += value;
+            remove => _onDamageTaken -= value;
         }
 
         private void Awake()
@@ -29,6 +45,7 @@ namespace Project.Gameplay
             ServiceLocator.Instance.Register(this);
             IsServiceReady = true;
             _timer = _TimerDuration;
+            _health = _MaxHealth;
             InitBuildSettings();
             InitResources();
         }
@@ -38,17 +55,19 @@ namespace Project.Gameplay
             BuildMouseOver();
 
             _timer = Mathf.Clamp(_timer - Time.deltaTime, 0, _TimerDuration);
-            if (_timer <= 0)
-            {
-                AddResources();
-                _timer = _TimerDuration;
-                _onTimerTick.Dispatch();
-            }
+            if (!(_timer <= 0)) return;
             
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
-            {
-                List<List<Vector2Int>> paths = Svc.World.Paths;
-            }
+            AddResources();
+            SpawnWave();
+                
+            _timer = _TimerDuration;
+            _onTimerTick.Dispatch();
+        }
+
+        public void Damage(float pDamage)
+        {
+            _health -= pDamage;
+            _onDamageTaken.Dispatch();
         }
     }
 }

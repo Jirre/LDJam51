@@ -71,7 +71,7 @@ namespace Project.Gameplay
             _income ??= new int [Enum.GetValues(typeof(EResources)).Length];
             for (int i = 0; i < _resources.Length; i++)
             {
-                _resources[i] = Mathf.Clamp(_resources[i] + _income[i], 0, MAX_AMOUNT);
+                _resources[i] = Mathf.Clamp(_resources[i] + _income[i] + _Config.BaseIncome[(EResources)i], 0, MAX_AMOUNT);
             }
             _onResourceUpdate.Dispatch();
         }

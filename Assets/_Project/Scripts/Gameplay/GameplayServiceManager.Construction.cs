@@ -89,7 +89,7 @@ namespace Project.Gameplay
                 if (UnityEngine.Input.GetMouseButtonDown(0) && PlaceBuilding(iPoint))
                     return;
                 
-                if (iPoint == _previousCoordinate) return;
+                if (iPoint == _previousCoordinate || _selectedBuildConfig == null) return;
                 _previousCoordinate = iPoint;
                 
                 _previewTransform.position = new Vector3(iPoint.x, 0f, iPoint.y);

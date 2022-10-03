@@ -154,6 +154,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _Config: {fileID: 11400000, guid: 085b44d07eab5dc4bbace268569c7739, type: 2}
   _TimerDuration: 10
+  _MaxHealth: 100
+  _paths:
+    _Keys: []
 --- !u!4 &24919946
 Transform:
   m_ObjectHideFlags: 0
@@ -161,7 +164,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 24919944}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1747,7 +1750,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 25
+  m_text: 50
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bbf9639f088d583498fa10b7d9645402, type: 2}
   m_sharedMaterial: {fileID: 6397833007320436997, guid: bbf9639f088d583498fa10b7d9645402, type: 2}
@@ -7279,6 +7282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1810350882}
+  - component: {fileID: 1810350883}
   m_Layer: 5
   m_Name: Health
   m_TagString: Untagged
@@ -7308,6 +7312,19 @@ RectTransform:
   m_AnchoredPosition: {x: 12, y: 0}
   m_SizeDelta: {x: 512, y: -24}
   m_Pivot: {x: 0, y: 0.5}
+--- !u!114 &1810350883
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1810350881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be77da7acbd93334d8844ae7e1eddb5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ImageField: {fileID: 1447249505}
 --- !u!1 &1825892895
 GameObject:
   m_ObjectHideFlags: 0

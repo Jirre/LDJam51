@@ -1,18 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using JvLib.Services;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class HealthVisualizer : MonoBehaviour
+namespace Project.UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class HealthVisualizer : UIBehaviour
     {
-        
-    }
+        [SerializeField] private Image _ImageField;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        protected override void OnEnable()
+        {
+            base.OnEnable();
+            if (!Svc.Ref.Gameplay.IsReady || !Svc.Gameplay.IsServiceReady) return;
+            Svc.Gameplay.OnDamageTaken += SetContext;
+            SetContext();
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+            Svc.Gameplay.OnDamageTaken += SetContext;
+            SetContext();
+        }
+
+        protected override void OnDisable()
+        {
+            base.OnDisable();
+            Svc.Gameplay.OnDamageTaken -= SetContext;
+        }
+
+        private void SetContext()
+        {
+            if (_ImageField != null) _ImageField.fillAmount = Svc.Gameplay.GetScaledHealth();
+        }
     }
 }
+

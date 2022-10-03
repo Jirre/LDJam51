@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using JvLib.Events;
+using JvLib.Services;
 using Project.Buildings;
 using Unity.Mathematics;
 using UnityEngine;
@@ -181,7 +182,7 @@ namespace Project.Generation
                     steps.Add(pos);
                 }
                 
-                _paths.Add(steps);
+                Svc.Gameplay.AddPath(steps.ToArray());
             }
 
             pState.GotoState(EStates.Rendering);

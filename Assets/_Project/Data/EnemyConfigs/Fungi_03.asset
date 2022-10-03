@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c007c93c5f4043df89c3ef8c31a2d168, type: 3}
-  m_Name: Enemy_UFO_Black
+  m_Name: Fungi_03
   m_EditorClassIdentifier: 
   _ParentObject: {fileID: 11400000, guid: 3a5449d13a125fb47a86022c7fbf4c31, type: 2}
-  _Guid: 66a7991e00d938d4d94190dc11a3ac71
-  name: Enemy_UFO_Black
-  _Prefab: {fileID: 3886467780465300899, guid: 59e617a5b5866ad49a0d234773797a35, type: 3}
-  _Speed: 0
+  _Guid: 32bd67785fae73c4391b7625ed760d13
+  name: Fungi_03
+  _Prefab: {fileID: 5782279495601585249, guid: 5a33911105787ba4ea8078576cc8a961, type: 3}
+  _Speed: 0.55
+  _BaseHealth: 4
+  _HealthMult: 1.075
+  _HealthMaxMult: 1.055
+  _Damage: 0
