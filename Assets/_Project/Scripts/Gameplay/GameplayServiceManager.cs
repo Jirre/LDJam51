@@ -10,6 +10,8 @@ namespace Project.Gameplay
     {
         public bool IsServiceReady { get; private set; }
 
+        private const string VOTE_URL = "";
+        
         [SerializeField] private GameConfig _Config;
         
         private float _timer;
@@ -18,13 +20,6 @@ namespace Project.Gameplay
 
         private int _wave;
         public int Wave => _wave;
-        
-        private SafeEvent _onTimerTick = new();
-        public event Action OnTimerTick
-        {
-            add => _onTimerTick += value;
-            remove => _onTimerTick -= value;
-        }
 
         private float _health;
         public float Health => _health;
@@ -44,24 +39,13 @@ namespace Project.Gameplay
         {
             ServiceLocator.Instance.Register(this);
             IsServiceReady = true;
-            _timer = _TimerDuration;
-            _health = _MaxHealth;
-            InitBuildSettings();
-            InitResources();
+            
+            InitStateMachine();
         }
 
         private void Update()
         {
-            BuildMouseOver();
-
-            _timer = Mathf.Clamp(_timer - Time.deltaTime, 0, _TimerDuration);
-            if (!(_timer <= 0)) return;
-            
-            AddResources();
-            SpawnWave();
-                
-            _timer = _TimerDuration;
-            _onTimerTick.Dispatch();
+            _stateMachine.Update();
         }
 
         public void Damage(float pDamage)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using JvLib.Services;
 using JvLib.Utilities;
+using Project.Gameplay;
 using UnityEngine;
 
 namespace Project.Enemies
@@ -32,16 +33,37 @@ namespace Project.Enemies
         
         private const float WALK_HEIGHT = 0.2f;
         
+        private bool _isPaused;
+        
         private void Awake()
         {
             _targetIndex = 0;
             _animator = GetComponent<Animator>();
             _isDead = false;
+            
+            _isPaused = !Svc.Gameplay.IsCurrentGameState(EGameStates.Gameplay);
+            Svc.Gameplay.OnGameStateChange += OnStateChange;
+        }
+        
+        private void OnDestroy()
+        {
+            Svc.Gameplay.OnGameStateChange -= OnStateChange;
+        }
+
+        private void OnStateChange(EGameStates pState)
+        {
+            _isPaused = pState != EGameStates.Gameplay;
+            _animator.SetFloat("Speed", _isPaused ? 0f : _config.Speed);
+            
+            if (pState != EGameStates.Gameplay && pState != EGameStates.Pause)
+                Destroy(gameObject);
         }
 
         private void Update()
         {
-            if (_isDead) return;
+            if (_isPaused || _isDead)
+                return;
+
             _lerp = Mathf.Clamp01(_lerp + Time.deltaTime * _config.Speed);
             transform.position = Vector3.Lerp(_current, _target, _lerp);
             

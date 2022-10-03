@@ -120,6 +120,9 @@ namespace Project.Gameplay
             BuildingBehaviour behaviour = obj.GetComponent<BuildingBehaviour>();
             behaviour.SetConfig(_selectedBuildConfig);
             behaviour.OnBuild(cell);
+            cell.SetBuilding(behaviour);
+            
+            Svc.Audio.Place();
             
             SelectBuildConfig(null);
             return true;

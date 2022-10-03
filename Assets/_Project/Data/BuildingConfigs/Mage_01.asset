@@ -18,7 +18,7 @@ MonoBehaviour:
   _Name: Mage Tower
   _BuildingPrototype: {fileID: 863895878890487163, guid: 73067809fec2a334983f1f6d5032b921, type: 3}
   _CanBeDemolished: 1
-  _AllowedCells: 
+  _AllowedCells: 00000000
   _Costs:
   - _Resource: 0
     _Amount: 40
@@ -31,5 +31,6 @@ MonoBehaviour:
   _Top: {fileID: 0}
   _Weapon: {fileID: 0}
   _Cooldown: 2.5
+  _ProjectileID: 
   _Damage: 8
   _Range: 4

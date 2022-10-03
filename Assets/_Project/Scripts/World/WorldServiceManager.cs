@@ -83,6 +83,11 @@ namespace Project.Generation
             _mountainHash.Dispose();
         }
 
+        public void SetConfig(WorldGeneratorConfig pConfig)
+        {
+            _Config = pConfig;
+        }
+
         private void InitState(EventState<EStates> pState)
         {
             Random.InitState((int)DateTime.Now.Ticks);
@@ -110,8 +115,6 @@ namespace Project.Generation
                 _Config.NoiseLacunarity,
                 _Config.NoisePersistence,
                 0f, 100f);
-            
-            Generate(Vector2Int.zero, 0);
         }
 
         private void CompleteState(EventState<EStates> pState)

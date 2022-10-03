@@ -8,6 +8,7 @@ namespace Project.Buildings
     public class GathererBehaviour : BuildingBehaviour
     {
         private EResources _resources;
+        private float _remainingContent;
         
         public override void OnBuild(WorldCell pCell)
         {

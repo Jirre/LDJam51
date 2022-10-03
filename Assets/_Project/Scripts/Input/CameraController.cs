@@ -1,4 +1,6 @@
+using DG.Tweening;
 using JvLib.Services;
+using Project.Gameplay;
 using UnityEngine;
 
 namespace Project.Input
@@ -21,6 +23,8 @@ namespace Project.Input
         private Vector2 _minBound;
         private Vector2 _maxBound;
         [SerializeField] private float _boundBuffer;
+
+        private const float IDLE_SPEED = 0.2f;
         
         private float _zoom;
 
@@ -38,15 +42,25 @@ namespace Project.Input
         private void Start()
         {
             Svc.World.OnBuildFinish += ChangeBounds;
+            Svc.Gameplay.OnGameStateChange += OnGameStateChange;
         }
 
         private void OnDestroy()
         {
             Svc.World.OnBuildFinish -= ChangeBounds;
+            Svc.Gameplay.OnGameStateChange -= OnGameStateChange;
         }
 
         private void Update()
         {
+            if (Svc.Gameplay.IsCurrentGameState(EGameStates.Menu))
+            {
+                transform.eulerAngles += Vector3.up * Time.deltaTime * -_RotationSpeed * IDLE_SPEED;
+            }
+            
+            if (!Svc.Gameplay.IsCurrentGameState(EGameStates.Gameplay))
+                return;
+            
             Vector2 mousePos = _camera.ScreenToViewportPoint(UnityEngine.Input.mousePosition);
 
             bool lKey = UnityEngine.Input.GetKey(KeyCode.A);
@@ -77,10 +91,23 @@ namespace Project.Input
             _PitchAnchor.localEulerAngles = Vector3.right * (35f + _zoom * 2f);
         }
 
+        public void ResetCamera()
+        {
+            DOTween.To(x => _zoom = x, _zoom, _DefaultZoom, 1f);
+            _cameraTransform.DOLocalMove(Vector3.forward * -_DefaultZoom, 1f);
+            transform.DOMove(Vector3.zero, 1f);
+        }
+
         private void ChangeBounds()
         {
             _minBound = Svc.World.MinCoordinate - Vector2.one * _boundBuffer;
             _maxBound = Svc.World.MaxCoordinate + Vector2.one * _boundBuffer;
+        }
+
+        private void OnGameStateChange(EGameStates pState)
+        {
+            if (pState is EGameStates.InitGame or EGameStates.GameOver)
+                ResetCamera();
         }
     }
 }

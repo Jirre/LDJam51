@@ -27,6 +27,12 @@ namespace Project.Gameplay
                 _resources[(int) kv.Key] = kv.Value;
             }
             _onResourceUpdate.Dispatch();
+
+            _income ??= new int [Enum.GetValues(typeof(EResources)).Length];
+            for (int i = 0; i < _income.Length; i++)
+            {
+                _income[i] = 0;
+            }
         }
 
         public bool TrySpendResource(ResourceAmount[] pAmounts)

@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using JvLib.Pooling.Objects;
 using JvLib.Services;
 using JvLib.Utilities;
 using Project.Enemies;
+using Project.Gameplay;
 using UnityEngine;
 
 namespace Project.Buildings
@@ -19,13 +21,30 @@ namespace Project.Buildings
         private float _timer;
         private ObjectPool _pool;
 
+        private bool _isPaused;
+
         private void Awake()
         {
             _lineRenderer = GetComponent<LineRenderer>();
+            _isPaused = !Svc.Gameplay.IsCurrentGameState(EGameStates.Gameplay);
+            Svc.Gameplay.OnGameStateChange += OnStateChange;
+        }
+
+        private void OnDestroy()
+        {
+            Svc.Gameplay.OnGameStateChange -= OnStateChange;
+        }
+
+        private void OnStateChange(EGameStates pState)
+        {
+            _isPaused = pState != EGameStates.Gameplay;
         }
 
         private void Update()
         {
+            if (_isPaused)
+                return;
+            
             if (!((_timer -= Time.deltaTime) <= 0)) 
                 return;
             
@@ -97,6 +116,12 @@ namespace Project.Buildings
             }
 
             return results;
+        }
+
+        public override void OnDemolish()
+        {
+            if (_lineRenderer != null) _lineRenderer.positionCount = 0;
+            base.OnDemolish();
         }
     }
 }

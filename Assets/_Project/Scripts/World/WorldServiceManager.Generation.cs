@@ -31,11 +31,27 @@ namespace Project.Generation
             _maxCells += pAddedMaxCells;
             _endPoints = new List<Vector2Int>();
             
-            _generators = new List<WorldGenerator>();
-            _generators.Add(new WorldGenerator(pPosition, 0));
+            _generators = new List<WorldGenerator> {new WorldGenerator(pPosition, 0)};
             if (!_cells.ContainsKey(pPosition))
                 _cells.Add(Vector2Int.zero, new WorldCell(pPosition, transform));
             _stateMachine.GotoState(EStates.GenerateGround);
+        }
+
+        public void Clear()
+        {
+            if (!_stateMachine.IsCurrentState(EStates.Init) &&
+                !_stateMachine.IsCurrentState(EStates.Complete))
+                throw new Exception("Can't start clearing of a world while another build is in progress");
+
+            _maxCells = _Config.MaxFloors;
+            foreach (KeyValuePair<Vector2Int, WorldCell> kv in _cells)
+            {
+                kv.Value.Dispose(Mathf.Ceil(Vector2Int.Distance(kv.Key, Vector2Int.zero)));
+            }
+            
+            _cells.Clear();
+            MinCoordinate = Vector2Int.zero;
+            MaxCoordinate = Vector2Int.zero;
         }
         
         private void GenerateGroundState(EventState<EStates> pState)

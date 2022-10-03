@@ -18,13 +18,10 @@ namespace Project.Buildings
 
         public virtual void SetConfig(BuildingConfig pConfig)
         {
+            Dispose();
             _Config = pConfig;
             _objects ??= new List<Transform>();
             
-            foreach (Transform o in _objects)
-            {
-                o.DOMoveY(-DROP_HEIGHT, DROP_DELAY * DROP_HEIGHT * o.transform.position.y);
-            }
             _objects.Clear();
             TurretPosition = transform.position + Vector3.up * BuildingConstants.WEAPON_ADDED_HEIGHT;
 
@@ -60,6 +57,18 @@ namespace Project.Buildings
             _objects.Add(topObject.transform);
             if (pConfig.Weapon == null) return;
             SetWeapon(pConfig.Weapon, BuildingConstants.TOP_HEIGHT + BuildingConstants.WEAPON_ADDED_HEIGHT);
+        }
+
+        public void Dispose()
+        {
+            _objects ??= new List<Transform>();
+            
+            foreach (Transform o in _objects)
+            {
+                o.DOMoveY(-DROP_HEIGHT, DROP_DELAY * DROP_HEIGHT * o.transform.position.y);
+            }
+
+            OnDemolish();
         }
 
 
