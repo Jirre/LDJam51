@@ -82,9 +82,9 @@ namespace Project.Buildings
 
             Transform tTransform = target.transform;
 
-            Quaternion rot = Quaternion.Euler(Vector3.up * -MathUtility.DegPointDirection(
+            Quaternion rot = Quaternion.Euler(Vector3.up * (90f -MathUtility.DegPointDirection(
                 new Vector2(TurretPosition.x, TurretPosition.z),
-                new Vector2(tTransform.position.x, tTransform.position.z)));
+                new Vector2(tTransform.position.x, tTransform.position.z))));
             
             if (TurretTransform != null) TurretTransform.rotation = rot;
             GameObject obj = _pool.Activate(TurretPosition, rot);
