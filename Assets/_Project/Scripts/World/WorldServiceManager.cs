@@ -98,7 +98,7 @@ namespace Project.Generation
             _cells = new Dictionary<Vector2Int, WorldCell>();
             _maxCells = _Config.MaxFloors;
 
-            _woodHash = NoiseHash.Generate((int)DateTime.Now.Ticks, 128);
+            _woodHash = NoiseHash.Generate((int)DateTime.Now.Ticks);
             _woodNoiseGenerator = new SimplexNoise2D(
                 _woodHash,
                 _Config.NoiseFrequency,
@@ -107,7 +107,7 @@ namespace Project.Generation
                 _Config.NoisePersistence,
                 0f, 100f);
             
-            _mountainHash = NoiseHash.Generate(int.MaxValue - (int)DateTime.Now.Ticks, 128);
+            _mountainHash = NoiseHash.Generate(int.MaxValue - (int)DateTime.Now.Ticks);
             _mountainNoiseGenerator = new SimplexNoise2D(
                 _mountainHash,
                 _Config.NoiseFrequency,

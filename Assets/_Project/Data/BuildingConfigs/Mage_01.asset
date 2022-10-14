@@ -31,6 +31,6 @@ MonoBehaviour:
   _Top: {fileID: 8530876596262760654, guid: 2e8ce715c785853488ea3698256791bc, type: 3}
   _Weapon: {fileID: 0}
   _Cooldown: 2.5
-  _ProjectileID: P_Magic
+  _Projectile: {fileID: 11400000, guid: ad8ced5304de2ff4989932eebbb56184, type: 2}
   _Damage: 5
   _Range: 4

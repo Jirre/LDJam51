@@ -12991,7 +12991,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1523723781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16744,26 +16744,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Data:
-  - _Id: P_Arrow
-    _Source: {fileID: 3259815129848761658, guid: 0c9a5c1e5be227442acf43aec90449dd, type: 3}
-    _Buffer: 32
-    _GroupId: 
-    _GroupWeight: 0
-  - _Id: P_Catapult
-    _Source: {fileID: 4966047779953898896, guid: 29a579af3eb785846862003b7896391e, type: 3}
-    _Buffer: 32
-    _GroupId: 
-    _GroupWeight: 0
-  - _Id: P_Cannon
-    _Source: {fileID: 8640000217223417002, guid: 963e7362747c75f47b4c706fb2c737ed, type: 3}
-    _Buffer: 32
-    _GroupId: 
-    _GroupWeight: 0
-  - _Id: P_Magic
-    _Source: {fileID: 7213493328720746400, guid: 2ad87769f2c7a424baa974be7a0b4f7c, type: 3}
-    _Buffer: 32
-    _GroupId: 
-    _GroupWeight: 0
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1825892895
 GameObject:
   m_ObjectHideFlags: 0

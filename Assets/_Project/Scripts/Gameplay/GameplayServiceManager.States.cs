@@ -86,14 +86,16 @@ namespace Project.Gameplay
             _timer = _TimerDuration;
             _health = _MaxHealth;
             _onDamageTaken.Dispatch();
-            
+
             InitBuildSettings();
-            InitResources();
-            
+
             _paths ??= new Dictionary<Vector2Int, Vector2Int[]>();
             _paths.Clear();
 
             Svc.World.Clear();
+            
+            InitResources();
+            
             Svc.World.SetConfig(_Config.WorldSettings[Random.Range(0, _Config.WorldSettings.Count)]);
             Svc.World.Generate(Vector2Int.zero, 0);
             Svc.World.OnBuildFinish += WaitForBuild;

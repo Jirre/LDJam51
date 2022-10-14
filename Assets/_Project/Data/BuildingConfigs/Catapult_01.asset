@@ -29,6 +29,6 @@ MonoBehaviour:
   _Top: {fileID: 6680353027674912844, guid: 1f944f6a538693347a90930b5e18ba18, type: 3}
   _Weapon: {fileID: 31390816497622203, guid: dd5c73eb76a7fdd428974aac9c42d7da, type: 3}
   _Cooldown: 2.5
-  _ProjectileID: P_Catapult
+  _Projectile: {fileID: 11400000, guid: 13fd97863b793c04c810f56b272c4c03, type: 2}
   _Damage: 6
   _Range: 8

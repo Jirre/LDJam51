@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8649519af542f3be16e6ea5bb981cf, type: 3}
+  m_Name: CannonBall
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 66f03615de1d04247ab4211d1b493f79, type: 2}
+  _Guid: e5ed327db6fe2f64ca64e3dbe5c8f95c
+  name: CannonBall
+  _Prefab: {fileID: 8640000217223417002, guid: 963e7362747c75f47b4c706fb2c737ed, type: 3}
+  _Buffer: 32

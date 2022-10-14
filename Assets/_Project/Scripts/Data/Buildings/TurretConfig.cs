@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using JvLib.Pooling.Data.Objects;
+using UnityEngine;
 
 namespace Project.Buildings
 {
@@ -6,8 +7,8 @@ namespace Project.Buildings
     {
         [SerializeField] private float _Cooldown;
         public float Cooldown => _Cooldown;
-        [SerializeField] private string _ProjectileID;
-        public string ProjectileID => _ProjectileID;
+        [SerializeField] private PooledObjectConfig _Projectile;
+        public PooledObjectConfig Projectile => _Projectile;
 
         [SerializeField] private float _Damage;
         public float Damage => _Damage;

@@ -1,7 +1,4 @@
-﻿using System;
-using JvLib.Pooling.Objects;
-using JvLib.Pooling.Particles;
-using JvLib.Services;
+﻿using JvLib.Pooling.Objects;
 using Project.Enemies;
 using UnityEngine;
 
@@ -11,7 +8,6 @@ namespace Project.Buildings
     {
         [SerializeField] private AnimationCurve _HeightCurve;
         [SerializeField] private float _Duration;
-        private ParticlePool _particlePool;
 
         private Vector3 _startPosition;
         protected Transform TargetTransform;

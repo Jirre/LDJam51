@@ -103,7 +103,7 @@ namespace Project.Buildings
             _lineRenderer.SetPositions(GetPositions(tConfig));
 
             _timer = tConfig.Cooldown;
-            _pool = Svc.ObjectPools.GetPool(tConfig.ProjectileID);
+            _pool = Svc.ObjectPools.GetPool(tConfig.Projectile);
         }
 
         private Vector3[] GetPositions(TurretConfig pConfig)

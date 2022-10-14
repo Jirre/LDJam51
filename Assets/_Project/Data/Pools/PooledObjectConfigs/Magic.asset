@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e8649519af542f3be16e6ea5bb981cf, type: 3}
+  m_Name: Magic
+  m_EditorClassIdentifier: 
+  _ParentObject: {fileID: 11400000, guid: 66f03615de1d04247ab4211d1b493f79, type: 2}
+  _Guid: ad8ced5304de2ff4989932eebbb56184
+  name: Magic
+  _Prefab: {fileID: 7213493328720746400, guid: 2ad87769f2c7a424baa974be7a0b4f7c, type: 3}
+  _Buffer: 16
