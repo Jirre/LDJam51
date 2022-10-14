@@ -15,7 +15,7 @@ MonoBehaviour:
   _ParentObject: {fileID: 11400000, guid: 3a5449d13a125fb47a86022c7fbf4c31, type: 2}
   _Guid: b7708d522ae957c418d46c20f8643b11
   name: Ghost_03
-  _Prefab: {fileID: 0}
+  _Prefab: {fileID: 4921066304908541566, guid: 145285a40b1e36c4b91e96d2a7c86e46, type: 3}
   _Speed: 1.25
   _BaseHealth: 1
   _HealthMult: 1.015

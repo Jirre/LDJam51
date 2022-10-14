@@ -13,7 +13,7 @@ namespace Project.Generation
 {
     public partial class WorldServiceManager //Generation
     {
-        private SafeEvent _onBuildFinish = new SafeEvent();
+        private SafeEvent _onBuildFinish = new();
         public event Action OnBuildFinish
         {
             add => _onBuildFinish += value;
